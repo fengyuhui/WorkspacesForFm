@@ -1,9 +1,16 @@
-#fm-covermain{margin: 150rpx auto;border-radius: 20rpx;overflow: hidden;position: relative;z-index: 3;width:700rpx;height:600rpx;
-background-color: #ccc}
+#fm-covermain{margin: 0 auto;border-radius: 20rpx;overflow: hidden;position: relative;z-index: 3;width:700rpx;height:550rpx;
+background-color: #bbb}
 #fm-cmpic{position: absolute;left:0;top: 0;z-index: 2; opacity: 0;}
-#fm-covermain .fadein{ animation:  fadein linear 1s; opacity: 1; transition:  all linear 1s}
+#fm-covermain.fadein{ animation:  fadein linear 1s; opacity: 1; transition:  all linear 1s}
 #fm-covermain image{width: 400rpx;height:400rpx;}
 #fm-covermain #fm-cmbg{margin:40rpx 90rpx ;width:350rpx;height: 350rpx;}
+
+#user{position: relative;height:0;padding-top:20%;width:100%;background-size:cover;background-position: center center;
+background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #fff;}
+#user_info{position: absolute;left:40rpx;bottom:50rpx;color: #fff;overflow: hidden}
+#user_ava{width:90rpx;height:90rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;margin-right:15rpx;}
+
+
 @keyframes fadein{
     0%{ opacity: 0}
     100%{ opacity: 1}
