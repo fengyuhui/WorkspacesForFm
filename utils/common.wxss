@@ -80,7 +80,7 @@ width:100%;z-index: 3;filter: brightness(.1)}
 .sm_title{padding:0 20rpx;font-size:24rpx;display: block;color:#6a6a6a;background-color: #eeeff0;line-height: 56rpx;}
 
  
-.commentscount text{position: absolute;font-size: 30rpx;left:3%;top:25%;color: #fff}
+.commentscount text{position: absolute;font-size: 30rpx;left:3%;top:29%;color: #fff}
 
 
 .flex-boxlist{overflow: hidden;display: flex;flex-wrap:wrap;padding-right: 15rpx;}

@@ -58,9 +58,63 @@
 
   <!-- 分类小按钮{ -->
     <view id="types" class="types">
-    <view data-id="{{music.id}}" class="like">
-        <image src="../../../image/a_t.png" />
+    <view data-id="1" class="energy">
+        <image src="../../../image/pinwheel.png" />
         <text>活力早晨</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/music88.png" />
+        <text>早餐音乐</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/modern11.png" />
+        <text>上学的路上</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/visible.png" />
+        <text>眼保健操</text>
+    </view>
+  </view>
+  <!-- 分类小按钮} -->
+
+   <!-- 分类小按钮{ -->
+    <view id="types" class="types">
+    <view data-id="1" class="energy">
+        <image src="../../../image/skyscraper.png" />
+        <text>放学的路上</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/family11.png" />
+        <text>欢迎回家</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/books8.png" />
+        <text>做作业</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/teddy.png" />
+        <text>玩一会</text>
+    </view>
+  </view>
+  <!-- 分类小按钮} -->
+
+   <!-- 分类小按钮{ -->
+    <view id="types" class="types">
+    <view data-id="1" class="energy">
+        <image src="../../../image/music92.png" />
+        <text>晚餐音乐</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/abc10.png" />
+        <text>听英语</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/book200.png" />
+        <text>听语文</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/fan2.png" />
+        <text>听古诗</text>
     </view>
   </view>
   <!-- 分类小按钮} -->
