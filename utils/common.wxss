@@ -37,7 +37,7 @@ border-radius: 3rpx;animation: cnloading .9s linear infinite; transform-origin: 
 #playing-status progress{ width:470rpx;margin: 0 auto;color: #000;position: relative;border-radius: 4rpx;}
 #playing-status progress text{position: absolute;display: block;height:8rpx;width: 8rpx;overflow: hidden;background-color: #d33a31;
 border:12rpx solid #fff;border-radius: 50%;top:50%; transform: translate3d(-50%,-50%,0)}
-#playing-status .time{width:80rpx ;text-align:center;display: block;font-size: 24rpx;}
+#playing-status.time{width:80rpx ;text-align:center;display: block;font-size: 24rpx;}
 
 .tab{display: flex;border-bottom: 1rpx solid #dfdfdf; background: #f8f8f8;height: 80rpx;line-height: 80rpx;}
 .tab .tab-item{text-align: center; flex:1; word-break: keep-all}
@@ -80,7 +80,7 @@ width:100%;z-index: 3;filter: brightness(.1)}
 .sm_title{padding:0 20rpx;font-size:24rpx;display: block;color:#6a6a6a;background-color: #eeeff0;line-height: 56rpx;}
 
  
-.commentscount text{position: absolute;font-size: 22rpx;left: 50%;top:50%;margin-left:10rpx;margin-top: -35rpx;color: #ddd}
+.commentscount text{position: absolute;font-size: 30rpx;left:3%;top:25%;color: #fff}
 
 
 .flex-boxlist{overflow: hidden;display: flex;flex-wrap:wrap;padding-right: 15rpx;}
