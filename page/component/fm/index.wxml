@@ -1,17 +1,40 @@
 <import src="../../../utils/playpercent.wxml" />
 <view id="playingpage">
+
+  <!-- 用户信息{ -->
     <view id="user" style="background-image:url({{user.backgroundUrl}})">
     <view id="user_info">
       <image id="user_ava" class="user_avator" src="{{user.avatarUrl}}" />
     </view>
+
+    
+    <!-- 选择分类{ -->
+    <view id="select" bindtap="choiceItem" data-item="2" class="chioce-item" hover-class="click-once-opaque">
+      <text>{{activeSortingName}}</text>
+      <image id="select_image" class="icon-chioce" src="{{sortingChioceIcon}}" />
+
+    </view>
+  <!-- 选择分类} -->
+
+
+
+  <!-- 列表选项{ -->
+    <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
+      <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">
+      {{item.value}}
+      </view>
   </view>
-  <view id="fm-covermain" class="{{showlrc?'playinghidden':''}}" bindtap="loadlrc">
+  <!-- 列表选项} -->
+  </view>
+  <!-- 用户信息} -->
+
+   <view id="fm-covermain">
     <view id="title" class="title">
     <view id="type">
     <text>活力早晨</text>
     </view>
     <view>
-      <image src="../../../image/upload.png" /> 
+      <image src="../../../image/wd.png" /> 
     </view>
     </view>
     <view id="musicName" class="musicName">
@@ -39,15 +62,10 @@
 
 
   </view>
-  <view id="fm-mdes" class="{{showlrc?'playinghidden':''}}">
-    <text id="fm-mname">{{music.name}}</text>
-    <text id="fm-martist">{{music.artists[0].name}}</text>
-  </view>
-  <template is="lrc" data="{{lrc:lrc,showlrc:showlrc,lrcindex:lrcindex}}" />
-  </view>
+  </view> 
 
   <!-- 分类小按钮{ -->
-    <view id="types" class="types">
+  <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/pinwheel.png" />
         <text>活力早晨</text>
@@ -68,7 +86,7 @@
   <!-- 分类小按钮} -->
 
    <!-- 分类小按钮{ -->
-    <view id="types" class="types">
+  <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/skyscraper.png" />
         <text>放学的路上</text>
@@ -83,13 +101,13 @@
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/teddy.png" />
-        <text>玩一会</text>
+        <text>玩一会儿</text>
     </view>
   </view>
   <!-- 分类小按钮} -->
 
    <!-- 分类小按钮{ -->
-    <view id="types" class="types">
+   <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/music92.png" />
         <text>晚餐音乐</text>
@@ -106,7 +124,9 @@
         <image src="../../../image/fan2.png" />
         <text>听古诗</text>
     </view>
-  </view>
+  </view> -->
   <!-- 分类小按钮} -->
 
+    <view bindtap="hideAllChioce" class="mask" hidden="{{!chioceSorting}}">
+    </view>
 </view>

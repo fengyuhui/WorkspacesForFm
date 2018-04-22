@@ -9,12 +9,28 @@ Page({
         percent: 1,
         imgload: false,
         playing: true,
-        showlrc: false,
         commentscount: 0,
-        lrc: {}
+        sortingChioceIcon: "/image/fm/icon-go-black.png",
+        activeSortingIndex: -1,
+        chioceSorting: false,
+        activeSortingName:"小学一年级",
+        sortingList: [{ 
+          key: 1, value: "小学一年级"
+        }, {
+          key: 2, value: "小学二年级"
+        }, {
+          key: 3, value: "小学三年级"
+        }, {
+          key: 4, value: "小学四年级"
+        }, {
+          key: 5, value: "小学五年级"
+        }, {
+          key: 6, value: "小学六年级"
+        }], 
     },
     onLoad: function () {
         var music = app.globalData.list_fm[app.globalData.index_fm];
+        var activeSortingName = "小学一年级";
         app.globalData.playtype = 2;
         var that = this;
         if (music) {
@@ -83,5 +99,45 @@ Page({
             showlrc: false
         })
         app.nextfm();
-    }
+    },
+      hideAllChioce: function () {
+      this.setData({
+        sortingChioceIcon: "/image/fm/icon-go-black.png",
+        chioceSorting: false,
+      });
+    },
+      //条件选择
+      choiceItem: function (e) {
+        switch (e.currentTarget.dataset.item) {
+          case "2":
+            if (this.data.chioceSorting) {
+              this.setData({
+                sortingChioceIcon: "/image/fm/icon-go-black.png",
+                chioceSorting: false,
+              });
+            }
+            else {
+              this.setData({
+                sortingChioceIcon: "/image/fm/icon-down-black.png",
+                chioceSorting: true,
+              });
+            }
+            break;
+        }
+      },
+
+        //综合排序
+  selectSorting: function (e) {
+        var index = e.currentTarget.dataset.index;
+        this.setData({
+          sortingChioceIcon: "/image/fm/icon-go-black.png",
+          chioceSorting: false,
+          activeSortingIndex: index,
+          activeSortingName: this.data.sortingList[index].value,
+          productList: [],
+          pageIndex: 1,
+          loadOver: false,
+          isLoading: true
+        })
+      }
 })

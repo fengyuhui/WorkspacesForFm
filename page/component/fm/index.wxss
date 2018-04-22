@@ -1,14 +1,23 @@
-#fm-covermain{margin: 0 auto;border-radius: 20rpx;overflow: hidden;position: relative;z-index: 3;width:700rpx;height:550rpx;
-background-color: #bbb}
+#fm-covermain{margin: 0 auto;border-radius: 20rpx;overflow: hidden;position: relative;z-index: 0;width:700rpx;height:550rpx;
+background-color: #bbb
+}
 #fm-cmpic{position: absolute;left:0;top: 0;z-index: 2; opacity: 0;}
 #fm-covermain.fadein{ animation:  fadein linear 1s; opacity: 1; transition:  all linear 1s}
 #fm-covermain image{width: 400rpx;height:400rpx;}
 #fm-covermain #fm-cmbg{margin:40rpx 90rpx ;width:350rpx;height: 350rpx;}
 
 #user{position: relative;height:0;padding-top:22%;width:100%;background-size:cover;background-position: center center;
-background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #fff;}
+background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #fff;
+z-index: 1;
+}
+
 #user_info{position: absolute;left:40rpx;bottom:50rpx;color: #fff;overflow: hidden}
 #user_ava{width:90rpx;height:90rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;margin-right:15rpx;}
+
+#select{position: absolute;right:40rpx;bottom:80rpx;color: #aaa;overflow: hidden; text-align: center;}
+#select text{font-size: 40rpx;}
+/* #select image{position: absolute;right:20rpx;bottom:80rpx;color: #fff;overflow: hidden} */
+#select_image{width:40rpx;height:40rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;margin-right:15rpx;}
 
 
 @keyframes fadein{
@@ -27,7 +36,7 @@ background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #ff
 
 #title text{position: absolute;font-size: 40rpx;left:3%;top:15%;margin-left:10rpx;margin-top: -35rpx;color: #fff}
 
-#title image{position: absolute;right:0;top:0;width: 150rpx;height:150rpx;}
+#title image{position: absolute;right:3%;top:5%;width: 70rpx;height:70rpx;}
 
 #musicName{flex: 1;text-align: center;position: absolute;left:0;top:35%;margin-left:10rpx;margin-top: -35rpx;width: 100%}
 .musicName text{font-size: 37rpx;color: #fff}
@@ -35,5 +44,57 @@ background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #ff
 #types{margin: 50rpx 0;display: flex}
 #types view{flex: 1;text-align: center;position: relative;width: 100%}
 #types image{width: 80rpx;height:80rpx;}
-#types text{position: absolute;font-size: 29rpx;left:25%;top:95%;color: #aaa}
+#types text{position: absolute;font-size: 29rpx;left:22%;top:95%;color: #aaa}
+
+.mask{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.sorting-list{
+  margin-top: 50rpx;
+  position: absolute;
+  top: 0rpx;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1;
+  font-size: 14px;
+  border-bottom: 1rpx solid #aaa;
+  text-align: center;
+  color: #777
+  }
+
+
+.chioce-list-hide {
+  display: none !important;
+}
+
+.chioce-list-show {
+  top: 80rpx;
+  animation: slide 500ms;
+}
+
+@keyframes slide {
+  0% {
+    top: -500rpx;
+  }
+
+  100% {
+    top: 80rpx;
+  }
+}
+
+.sorting-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 40rpx;
+  border-bottom: 1rpx solid #ddd;
+}
 
