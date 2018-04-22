@@ -11,7 +11,7 @@ background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #ff
 z-index: 1;
 }
 
-#user_info{position: absolute;left:40rpx;bottom:50rpx;color: #fff;overflow: hidden}
+#user_info{position: absolute;left:40rpx;bottom:50rpx;color: #fff;overflow: hidden;}
 #user_ava{width:90rpx;height:90rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;margin-right:15rpx;}
 
 #select{position: absolute;right:40rpx;bottom:80rpx;color: #aaa;overflow: hidden; text-align: center;}
