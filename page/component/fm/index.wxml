@@ -20,10 +20,6 @@
     <view id="fm-fixed">
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
-      <view data-id="{{music.id}}" class="like">
-        <image src="../../../image/fm/py.png" />
-        <text>999+</text>
-      </view>
       <view data-id="{{music.id}}" hidden="{{music.stared}}">
         <image src="../../../image/fm/q9.png" />
       </view>
@@ -38,12 +34,6 @@
       </view>
       <view bindtap="nextplay">
         <image src="../../../image/fm/q2.png" />
-      </view>
-      <view class="commentscount">
-       
-        <navigator url="../recommend/index?id={{music.commentThreadId}}&from=song">
-        <text>配套文档</text>
-        </navigator>
       </view>
     </view>
 

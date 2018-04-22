@@ -1,15 +1,15 @@
 {
   "pages": [
-   "page/component/fm/index",
-   "page/component/index",
-   "page/component/playlist/index",
-   "page/component/mv/index",
-   "page/component/playing/index",
-   "page/component/login/index",
-   "page/component/toplist/index",
-   "page/component/recommend/index",
-   "page/component/search/index",
-   "page/component/album/index"
+  "page/component/fm/index",
+  "page/component/index",
+  "page/component/playlist/index",
+  "page/component/mv/index",
+  "page/component/playing/index",
+  "page/component/login/index",
+  "page/component/toplist/index",
+  "page/component/recommend/index",
+  "page/component/search/index",
+  "page/component/album/index"
 ],
   "window": {
     "navigationBarTextStyle": "#fff",
