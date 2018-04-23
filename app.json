@@ -7,9 +7,9 @@
   "page/component/login/index"
 ],
   "window": {
-    "navigationBarTextStyle": "#fff",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "Music",
-    "navigationBarBackgroundColor": "#d43c33",
+    "navigationBarBackgroundColor": "#FF3E96",
     "backgroundColor": "#fbfcfd"
   },
   "networkTimeout": {

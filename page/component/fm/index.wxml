@@ -34,7 +34,7 @@
     <text>活力早晨</text>
     </view>
     <view>
-      <image src="../../../image/wd.png" /> 
+      <image src="../../../image/but_share.png" /> 
     </view>
     </view>
     <view id="musicName" class="musicName">
@@ -43,20 +43,17 @@
     <view id="fm-fixed">
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
-      <view data-id="{{music.id}}" hidden="{{music.stared}}">
-        <image src="../../../image/fm/q9.png" />
-      </view>
-      <view data-id="{{music.id}}" hidden="{{!music.stared}}">
-        <image src="../../../image/fm/q0.png" />
+      <view bindtap="beforeplay" id = "switch">
+        <image src="../../../image/fm/time_left.png" />
       </view>
       <view bindtap="play" hidden="{{!playing}}">
-        <image src="../../../image/fm/q4.png" />
+        <image src="../../../image/fm/play_stop.png" />
       </view>
       <view bindtap="play" hidden="{{playing}}">
-        <image src="../../../image/fm/q8.png" />
+        <image src="../../../image/fm/play_start.png" />
       </view>
-      <view bindtap="nextplay">
-        <image src="../../../image/fm/q2.png" />
+      <view bindtap="nextplay"  id = "switch">
+        <image src="../../../image/fm/time_right.png"/>
       </view>
     </view>
 
