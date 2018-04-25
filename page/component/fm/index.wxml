@@ -22,7 +22,7 @@
     <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
     <view class="sorting-item">
     <text id = "cancel">取消</text>
-    <text id = "ok">确定</text>
+    <text id = "ok" >确定</text>
     </view>
       <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">
       {{item.value}}

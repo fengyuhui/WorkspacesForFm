@@ -90,7 +90,6 @@ Page({
     nextplay: function () {
         this.setData({
             imgload: true,
-            lrc: [],
             playtime: common.formatduration(0),
             percent: .1,
             music: {},
