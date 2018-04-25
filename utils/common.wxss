@@ -34,7 +34,7 @@ border-radius: 3rpx;animation: cnloading .9s linear infinite; transform-origin: 
 
  
 #playing-status{display: flex;color:#b0b0b0;margin: 20rpx}
-#playing-status progress{ width:400rpx;margin: 0 auto;color: #b0b0b0;position: relative;border-radius: 4rpx;}
+#playing-status progress{ width:400rpx;margin: 0 auto;color: #b0b0b0;position: relative;border-radius: 4rpx; background-image: url('../../../image/fm/time_left.png')}
 #playing-status progress text{position: absolute;display: block;height:8rpx;width: 9rpx;overflow: hidden;background-color: #63a6f9;box-shadow: 0 0 2px 2px #b0b0b0;
 border:8rpx solid #fff;border-radius: 50%;top:50%; transform: translate3d(-50%,-50%,0)}
 #playing-status.time{width:80rpx ;text-align:center;display: block;font-size: 24rpx;}

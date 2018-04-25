@@ -7,11 +7,11 @@
       <image id="user_ava" class="user_avator" src="{{user.avatarUrl}}" />
     </view>
 
-    
     <!-- 选择分类{ -->
     <view id="select" bindtap="choiceItem" data-item="2" class="chioce-item" hover-class="click-once-opaque">
+    <image id="select_icon" class="icon-chioce" src="../../../image/fm/music_classify.png" />
       <text>{{activeSortingName}}</text>
-      <image id="select_image" class="icon-chioce" src="{{sortingChioceIcon}}" />
+      <image id="select_image" class="icon-chioce" src="../../../image/fm/more_enter.png" />
 
     </view>
   <!-- 选择分类} -->
@@ -28,13 +28,14 @@
   </view>
   <!-- 用户信息} -->
 
-   <view id="fm-covermain">
+   <view id="fm-covermain" style='background:url("../../../image/fm/play_bj.png");-webkit-background-size:cover;'>
     <view id="title" class="title">
     <view id="type">
+    <image id="type_image" src="../../../image/fm/music_icon.png" style = 'width: 30rpx;height:30rpx;'/> 
     <text>活力早晨</text>
     </view>
     <view>
-      <image src="../../../image/but_share.png" /> 
+      <image src="../../../image/but_share.png" style = 'width: 64rpx;height:63rpx;'/> 
     </view>
     </view>
     <view id="musicName" class="musicName">
@@ -44,7 +45,7 @@
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
       <view bindtap="beforeplay" id = "switch">
-        <image src="../../../image/fm/time_left.png" />
+        <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
       <view bindtap="play" hidden="{{!playing}}">
         <image src="../../../image/fm/play_stop.png" />
@@ -53,7 +54,7 @@
         <image src="../../../image/fm/play_start.png" />
       </view>
       <view bindtap="nextplay"  id = "switch">
-        <image src="../../../image/fm/time_right.png"/>
+        <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
     </view>
 
