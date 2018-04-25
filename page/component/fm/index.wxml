@@ -44,7 +44,7 @@
     <view id="fm-fixed">
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
-      <view bindtap="beforeplay" id = "switch">
+      <view bindtap="beforeplay" id = "switchleft">
         <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
       <view bindtap="play" hidden="{{!playing}}">
@@ -53,7 +53,7 @@
       <view bindtap="play" hidden="{{playing}}">
         <image src="../../../image/fm/play_start.png" />
       </view>
-      <view bindtap="nextplay"  id = "switch">
+      <view bindtap="nextplay"  id = "switchright">
         <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
     </view>
