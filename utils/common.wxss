@@ -33,14 +33,15 @@ border-radius: 3rpx;animation: cnloading .9s linear infinite; transform-origin: 
 .cntloading .cl3{animation-delay: -.3s}
 
  
-#playing-status{display: flex;color:#b0b0b0;margin: 20rpx}
+#playing-status{display: flex;color:#a2a7aa;margin: 20rpx}
 #playing-status{margin-left:58rpx;margin-top:233rpx;}
 #play_time{margin-top:20rpx}
 #endtime{margin-left:430rpx;}
 #starttime{margin-left:-553rpx;}
-#playing-status progress{ width:552rpx;margin: 0 auto;color: #b0b0b0;position: relative;border-radius: 4rpx;}
-#playing-status progress text{position: absolute;display: block;height:8rpx;width: 9rpx;overflow: hidden;background-color: #63a6f9;box-shadow: 0 0 2px 2px #b0b0b0;background-image: url('../../../image/fm/play_shot.png');
+#playing-status progress{ width:552rpx;margin: 0 auto;position: relative;border-radius: 4rpx;}
+#playing-status progress text{position: absolute;display: block;height:8rpx;width: 9rpx;overflow: hidden;background-color: #63a6f9;box-shadow: 0 0 2px 2px #b0b0b0;
 border:8rpx solid #fff;border-radius: 50%;top:50%; transform: translate3d(-50%,-50%,0)}
+#play_shot{color:#a2a7aa}
 
 .tab{display: flex;border-bottom: 1rpx solid #dfdfdf; background: #f8f8f8;height: 80rpx;line-height: 80rpx;}
 .tab .tab-item{text-align: center; flex:1; word-break: keep-all}

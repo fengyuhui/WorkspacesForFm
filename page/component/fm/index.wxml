@@ -20,6 +20,10 @@
 
   <!-- 列表选项{ -->
     <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
+    <view class="sorting-item">
+    <text id = "cancel">取消</text>
+    <text id = "ok">确定</text>
+    </view>
       <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">
       {{item.value}}
       </view>
@@ -47,11 +51,11 @@
       <view bindtap="beforeplay" id = "switchleft">
         <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
-      <view bindtap="play" hidden="{{!playing}}">
-        <image src="../../../image/fm/play_stop.png" />
+      <view bindtap="play" id = "switchmiddle" hidden="{{!playing}}">
+        <image src="../../../image/fm/play_stop.png" style = 'width: 162rpx;height:80rpx;'/>
       </view>
-      <view bindtap="play" hidden="{{playing}}">
-        <image src="../../../image/fm/play_start.png" />
+      <view bindtap="play" id = "switchmiddle" hidden="{{playing}}">
+        <image src="../../../image/fm/play_start.png" style = 'width: 162rpx;height:80rpx;'/>
       </view>
       <view bindtap="nextplay"  id = "switchright">
         <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
@@ -62,23 +66,29 @@
   </view>
   </view> 
 
+<view id = "subtypes">
+<view id = "typeleft">
+<image src="../../../image/fm/more_left.png" style = 'width: 15rpx;height:24rpx;'/>
+</view>
+
+<view id = "typemiddle">
   <!-- 分类小按钮{ -->
   <view id="types" class="types">
     <view data-id="1" class="energy">
-        <image src="../../../image/pinwheel.png" />
+        <image src="../../../image/music88.png" />
         <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/music88.png" />
-        <text>早餐音乐</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
-        <image src="../../../image/modern11.png" />
-        <text>上学的路上</text>
+        <image src="../../../image/music88.png" />
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/visible.png" />
-        <text>眼保健操</text>
+        <text>活力早晨</text>
     </view>
   </view>
   <!-- 分类小按钮} -->
@@ -87,19 +97,19 @@
   <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/skyscraper.png" />
-        <text>放学的路上</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/family11.png" />
-        <text>欢迎回家</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/books8.png" />
-        <text>做作业</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/teddy.png" />
-        <text>玩一会儿</text>
+        <text>活力早晨</text>
     </view>
   </view>
   <!-- 分类小按钮} -->
@@ -108,22 +118,50 @@
    <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/music92.png" />
-        <text>晚餐音乐</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/abc10.png" />
-        <text>听英语</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/book200.png" />
-        <text>听语文</text>
+        <text>活力早晨</text>
     </view>
     <view data-id="1" class="energy">
         <image src="../../../image/fan2.png" />
-        <text>听古诗</text>
+        <text>活力早晨</text>
     </view>
-  </view> -->
+  </view>
   <!-- 分类小按钮} -->
+
+  <!-- 分类小按钮{ -->
+   <view id="types" class="types">
+    <view data-id="1" class="energy">
+        <image src="../../../image/music92.png" />
+        <text>活力早晨</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/abc10.png" />
+        <text>活力早晨</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/book200.png" />
+        <text>活力早晨</text>
+    </view>
+    <view data-id="1" class="energy">
+        <image src="../../../image/fan2.png" />
+        <text>活力早晨</text>
+    </view>
+  </view>
+  <!-- 分类小按钮} -->
+  </view>
+
+<view id = "typeright">
+<image src="../../../image/fm/more_right.png" style = 'width: 15rpx;height:24rpx;'/>
+</view>
+
+  </view>
 
     <view bindtap="hideAllChioce" class="mask" hidden="{{!chioceSorting}}">
     </view>

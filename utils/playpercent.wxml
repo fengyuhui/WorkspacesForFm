@@ -1,8 +1,8 @@
 <template name="playingpercent">
   <view id="playing-status">
     <view id = "line">
-    <progress percent="{{percent}}" color="#d33a31" stroke-width="2">
-      <text style="left:{{percent}}%"></text>
+    <progress percent="{{percent}}" stroke-width="4" backgroundColor = "#a2a7aa" activeColor = "#ff4892">
+      <text style="left:{{percent}}%" id = "play_shot"></text>
     </progress>
     </view>
     <view id = "play_time">
