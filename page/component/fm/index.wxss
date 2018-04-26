@@ -81,7 +81,6 @@ z-index: 0;
   font-size: 14px;
   border-bottom: 1rpx solid #aaa;
   text-align: center;
-  color: #777
   }
 
 
@@ -105,16 +104,22 @@ z-index: 0;
 }
 
 .sorting-item {
-  height: 77rpx;
+  height: 70rpx;
   padding: 0 30rpx;
-  line-height: 65rpx;
+  line-height: 55rpx;
   z-index: 2;
 }
 
+.sorting-item text{
+  z-index: 2;
+  font-size: 28rpx;
+  color: #a9a8a8
+}
+
 .sorting-itemactive-tag {
-  height: 77rpx;
+  height: 70rpx;
   padding: 0 30rpx;
-  line-height: 65rpx;
+  line-height: 70rpx;
   z-index: 2;
 }
 
