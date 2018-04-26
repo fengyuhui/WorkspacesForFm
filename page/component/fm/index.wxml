@@ -24,9 +24,11 @@
     <text id = "cancel">取消</text>
     <text id = "ok" >确定</text>
     </view>
+    <scroll-view scroll-y = "true" scroll-top = "500rpx"> 
       <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">
       {{item.value}}
       </view>
+      </scroll-view>
   </view>
   <!-- 列表选项} -->
   </view>

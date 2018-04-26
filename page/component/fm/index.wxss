@@ -52,8 +52,8 @@ z-index: 0;
 
 #subtypes{border-top:1rpx solid #f0f0f0;margin-top:8rpx;z-index: -1;}
 
-#typeleft{position: absolute;left:40rpx;top:77%;z-index: -1;}
-#typeright{position: absolute;right:40rpx;top:77%;z-index: -1;}
+#typeleft{position: absolute;left:40rpx;top:75%;z-index: -1;}
+#typeright{position: absolute;right:40rpx;top:75%;z-index: -1;}
 #typemiddle{position: absolute;left:75rpx;width: 600rpx;top:52%;z-index: -1;}
 
 #ok{position: relative;margin-left:500rpx;margin-top:77%; color:green}
