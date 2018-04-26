@@ -1,4 +1,4 @@
-#fm-covermain{margin-top:130rpx;margin-left:40rpx;overflow: hidden;position: relative;z-index: -1;width:669rpx;height:539rpx;}
+#fm-covermain{margin-top:130rpx;margin-left:40rpx;overflow: hidden;position: relative;z-index: 0;width:669rpx;height:539rpx;}
 #fm-cmpic{position: absolute;left:0;top: 0;z-index: 0; opacity: 0;}
 #fm-covermain.fadein{ animation:  fadein linear 1s; opacity: 1; transition:  all linear 1s}
 #fm-covermain image{width: 400rpx;height:400rpx;}
@@ -9,8 +9,8 @@ background-repeat: no-repeat;background-color: #fff;border-bottom:1rpx solid #ff
 z-index: 0;
 }
 
-#user_info{position: absolute;left:62rpx;top:30rpx;color: #fff;overflow: hidden;z-index: -2;}
-#user_ava{width:85rpx;height:85rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;z-index: -2;}
+#user_info{position: absolute;left:62rpx;top:30rpx;color: #fff;overflow: hidden;z-index: 0;}
+#user_ava{width:85rpx;height:85rpx;border-radius: 50%;border:2rpx solid #fff;vertical-align: middle;}
 
 #select{position: absolute;right:40rpx;top:48rpx;color: #63a6f9;overflow: hidden; text-align: center;}
 #select text{font-size: 32rpx;margin-right:26rpx;vertical-align: middle;}
@@ -33,9 +33,9 @@ z-index: 0;
 #fm-action view{flex: 1;text-align: center;position: relative;width: 100%}
 /* #fm-action image{width: 162rpx;height:80rpx;vertical-align: middle;margin-right:15rpx;} */
 
-#switchleft image{margin-top:30rpx;margin-left:30rpx;position: relative;}
-#switchright image{margin-top:30rpx;margin-left:-70rpx;position: relative;}
-#switchmiddle image{margin-top:0rpx;margin-left:0rpx;position: relative;}
+#switchleft image{margin-top:30rpx;margin-left:30rpx;position: relative;z-index: 0;}
+#switchright image{margin-top:30rpx;margin-left:-70rpx;position: relative;z-index: 0;}
+#switchmiddle image{margin-top:0rpx;margin-left:0rpx;position: relative;z-index: 0;}
 
 #title text{position: absolute;font-size: 30rpx;left:50rpx;margin-left:47rpx;margin-top:35rpx;color: #000}
 #type_image{vertical-align: middle;margin-right:570rpx;margin-top:30rpx;}
@@ -50,14 +50,14 @@ z-index: 0;
 #types image{width: 46rpx;height:46rpx;}
 #types text{position: absolute;font-size: 23rpx;left:25%;top:100%;color: #b0b0b0;margin-top:8rpx;}
 
-#subtypes{border-top:1rpx solid #f0f0f0;margin-top:8rpx;z-index: -1;}
+#subtypes{border-top:1rpx solid #efefef;margin-top:8rpx;z-index: 0;}
 
-#typeleft{position: absolute;left:40rpx;top:75%;z-index: -1;}
-#typeright{position: absolute;right:40rpx;top:75%;z-index: -1;}
-#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:52%;z-index: -1;}
+#typeleft{position: absolute;left:40rpx;top:75%;z-index: 0;}
+#typeright{position: absolute;right:40rpx;top:75%;z-index: 0;}
+#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:52%;z-index: 0;}
 
-#ok{position: relative;margin-left:500rpx;margin-top:77%; color:green}
-#cancel{position: reletive;margin-left:20rpx;margin-top:77%;}
+#ok{position: relative;margin-left:500rpx;color:green;  z-index: 2;}
+#cancel{position: reletive;margin-left:5rpx;  z-index: 2;}
 
 .mask{
   position: fixed;
@@ -67,17 +67,17 @@ z-index: 0;
   left: 0;
   background-color: #000;
   opacity: 0.5;
-  z-index: -1;
+  z-index: 1;
 }
 
 .sorting-list{
-  margin-top: 550rpx;
+  margin-top: 680rpx;
   position: absolute;
   top: 0rpx;
   left: 0;
   width: 100%;
   background-color: #fff;
-  z-index: 1;
+  z-index: 3;
   font-size: 14px;
   border-bottom: 1rpx solid #aaa;
   text-align: center;
@@ -105,9 +105,56 @@ z-index: 0;
 }
 
 .sorting-item {
-  height: 80rpx;
-  line-height: 80rpx;
-  padding: 0 40rpx;
-  border-bottom: 1rpx solid #ddd;
+  height: 77rpx;
+  padding: 0 30rpx;
+  line-height: 65rpx;
+  z-index: 2;
+}
+
+.sorting-itemactive-tag {
+  height: 77rpx;
+  padding: 0 30rpx;
+  line-height: 65rpx;
+  z-index: 2;
+}
+
+.sorting-itemactive-tag text{
+  z-index: 2;
+  background-color: #63a6f9;
+  font-size: 35rpx;
+  color: #fff
+}
+
+.block {
+  border: 8px solid #71b471;
+  margin: 20rpx 20rpx;
+  padding: 10rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  text-align: center;
+}
+.top {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  background-color: #fff;
+  position: fixed;
+  bottom: 40rpx;
+  right: 20rpx;
+  text-align: center;
+  font-size: 50rpx;
+  opacity: .8;
+  border-radius: 50%;
+  border: 1px solid #fff;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.scroll{
+  z-index: 2;
 }
 

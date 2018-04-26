@@ -15,11 +15,12 @@
 
     </view>
   <!-- 选择分类} -->
-
+  </view>
+  <!-- 用户信息} -->
 
 
   <!-- 列表选项{ -->
-    <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
+     <!-- <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
     <view class="sorting-item">
     <text id = "cancel">取消</text>
     <text id = "ok" >确定</text>
@@ -29,10 +30,23 @@
       {{item.value}}
       </view>
       </scroll-view>
-  </view>
+  </view>  -->
+
+ <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
+    <view class="sorting-item">
+    <text id = "cancel">取消</text>
+    <text id = "ok" bindtap='ensure_type'>确定</text>
+    </view>
+    <scroll-view class="scroll" scroll-top = "500rpx" style="height:385rpx;" scroll-y="true" bindscroll="scrll"  bindscrolltolower="loadMore"> 
+      <view wx:for="{{sortingList}}" data-index="{{index}}"  class="sorting-item{{currentItem==index?'active-tag':''}}" catchtap="selectSorting">
+      <text decode="emsp">&emsp;{{item.value}}&emsp;</text>
+      </view>
+      </scroll-view>
+</view> 
+
+
+
   <!-- 列表选项} -->
-  </view>
-  <!-- 用户信息} -->
 
    <view id="fm-covermain" style='background:url("../../../image/fm/play_bj.png");-webkit-background-size:cover;'>
     <view id="title" class="title">
@@ -164,7 +178,6 @@
 </view>
 
   </view>
-
     <view bindtap="hideAllChioce" class="mask" hidden="{{!chioceSorting}}">
     </view>
 </view>

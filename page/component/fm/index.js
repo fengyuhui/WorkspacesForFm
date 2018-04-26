@@ -107,22 +107,9 @@ Page({
     },
       //条件选择
       choiceItem: function (e) {
-        switch (e.currentTarget.dataset.item) {
-          case "2":
-            if (this.data.chioceSorting) {
-              this.setData({
-                sortingChioceIcon: "/image/fm/icon-go-black.png",
-                chioceSorting: false,
-              });
-            }
-            else {
-              this.setData({
-                sortingChioceIcon: "/image/fm/icon-down-black.png",
-                chioceSorting: true,
-              });
-            }
-            break;
-        }
+        this.setData({
+          chioceSorting: true,
+        });
       },
 
         //综合排序
@@ -130,13 +117,42 @@ Page({
         var index = e.currentTarget.dataset.index;
         this.setData({
           sortingChioceIcon: "/image/fm/icon-go-black.png",
-          chioceSorting: false,
           activeSortingIndex: index,
           activeSortingName: this.data.sortingList[index].value,
           productList: [],
           pageIndex: 1,
           loadOver: false,
-          isLoading: true
+          isLoading: true,
+          'currentItem': index
         })
-      }
+      },
+  
+  ensure_type: function(e){
+    chioceSorting: false,
+      this.setData({
+        chioceSorting:false
+      })
+      },
+      
+  scrll: function (e) {
+    var scrollTop = e.detail.scrollTop
+    if (scrollTop > 600) {
+      this.setData({
+        scrollTop: 1,
+        hidden: false
+      })
+    } else {
+      this.setData({
+        scrollTop: 1,
+        hidden: true
+      });
+    }
+  },
+
+  goTop: function () {
+    this.setData({
+      scrollTop: 0,
+      hidden: true
+    })
+  }
 })
