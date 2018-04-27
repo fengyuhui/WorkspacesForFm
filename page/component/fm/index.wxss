@@ -56,7 +56,7 @@ z-index: 0;
 #typeright{position: absolute;right:40rpx;top:75%;z-index: 0;}
 #typemiddle{position: absolute;left:75rpx;width: 600rpx;top:52%;z-index: 0;}
 
-#ok{position: relative;margin-left:500rpx;color:green;  z-index: 2;}
+#ok{position: relative;margin-left:560rpx;color:#00CD00;  z-index: 2;}
 #cancel{position: reletive;margin-left:5rpx;  z-index: 2;}
 
 .mask{
@@ -123,11 +123,20 @@ z-index: 0;
   z-index: 2;
 }
 
-.sorting-itemactive-tag text{
+.backgroundviewactive-tag text{
   z-index: 2;
-  background-color: #63a6f9;
   font-size: 35rpx;
   color: #fff
+}
+
+.backgroundviewactive-tag{
+  height: 70rpx;
+  width:280rpx;
+  margin-top:0;
+  margin-left:200rpx;
+  line-height: 70rpx;
+  background-color: #63a6f9;
+  z-index: -1;
 }
 
 .block {

@@ -39,7 +39,9 @@
     </view>
     <scroll-view class="scroll" scroll-top = "520rpx" style="height:320rpx;" scroll-y="true" bindscroll="scrll"  bindscrolltolower="loadMore"> 
       <view wx:for="{{sortingList}}" data-index="{{index}}"  class="sorting-item{{currentItem==index?'active-tag':''}}" catchtap="selectSorting">
+      <view class="backgroundview{{currentItem==index?'active-tag':''}}">
       <text decode="emsp">&emsp;{{item.value}}&emsp;</text>
+      </view>
       </view>
       </scroll-view>
       <view class="sorting-item">
