@@ -51,8 +51,8 @@
 
 
   <!-- 列表选项} -->
-
-   <view id="fm-covermain" style='background:url("../../../image/fm/play_bj.png");-webkit-background-size:cover;'>
+   <!-- <view id="fm-covermain" style='background:url("img/play_bj.png");-webkit-background-size:cover;'> -->
+   <view id="fm-covermain">
     <view id="title" class="title">
     <view id="type">
     <image id="type_image" src="../../../image/fm/music_icon.png" style = 'width: 30rpx;height:30rpx;'/> 
