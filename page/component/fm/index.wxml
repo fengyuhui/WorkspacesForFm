@@ -52,6 +52,8 @@
 
   <!-- 列表选项} -->
    <!-- <view id="fm-covermain" style='background:url("img/play_bj.png");-webkit-background-size:cover;'> -->
+
+   <!-- 播放{ -->
    <view id="fm-covermain">
     <view id="title" class="title">
     <view id="type">
@@ -85,6 +87,7 @@
 
   </view>
   </view> 
+  <!-- 播放} -->
 
 <view id = "subtypes">
 <view id = "typeleft">
