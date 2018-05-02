@@ -55,7 +55,7 @@ App({
   },
   getfm: function () {
     var that = this;
-    console.log("从新获取fm")
+    console.log("重新获取")
     wx.request({
       url: 'https://n.sqaiyan.com/fm?t=' + (new Date()).getTime(),
       method: 'GET',
@@ -167,6 +167,7 @@ App({
     index_am: 0,
     playtype: 1,
     curplay: {},
+    playStorage:{},
     shuffle: 1,
     globalStop: true,
     currentPosition: 0

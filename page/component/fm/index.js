@@ -11,7 +11,7 @@ Page({
         imgload: false,
         playing: true,
         commentscount: 0,
-        sortingChioceIcon: "/image/fm/icon-go-black.png",
+        sortingChioceIcon: "/image/music88.png",
         activeSortingIndex: -1,
         chioceSorting: false,
         activeSortingName:"小学一年级",
@@ -30,13 +30,15 @@ Page({
         }, {
           key: 6, value: "小学六年级"
         }], 
-    },
-    //事件处理函数  
-    bindViewTap: function () {
-      wx.navigateTo({
-        url: '../logs/logs'
-      })
-    },
+      subtypesList:{
+         subtypesList1:[{subtypesId: '1', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '2', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '3', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '4', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }],
+         subtypesList2:[{ subtypesId: '5', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '6', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '7', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '8', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }],
+         subtypesList3: [{ subtypesId: '9', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '10', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '11', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '12', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }],
+         subtypesList4: [{ subtypesId: '13', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '14', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '15', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }],
+         subtypesList5: [{ subtypesId: '13', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '14', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '15', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }],
+         subtypesList6: [{ subtypesId: '13', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '14', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '15', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }]
+    }
+        },
     onLoad: function () {
         var that = this;
 
@@ -46,12 +48,13 @@ Page({
             userInfo: userInfo
           })
         });
-         
+
         //加载列表
         wx.request({
-          url: 'https://n.sqaiyan.com/sortinglists?id=2',
+          url: 'https://abc.com/sortinglists?id=2',
           success: function (res) {
             that.setData({
+              //sortingList: res.data.sortingList,
               sortingList: res.data.sortingList,
             });
           }
@@ -65,7 +68,7 @@ Page({
           listFlag: true
         })
 
-        if(playStorage!=[]){
+        if (playStorage!=[]){
           this.setData({
             id: playData.length,
             activeSortingIndex: that.data.index,
@@ -100,6 +103,33 @@ Page({
         userInfo: e.detail.userInfo,
         hasUserInfo: true
       })
+    },
+
+    playmusic: function (id) {
+      var that = this;
+      wx.request({
+        url: 'https://abc.com/song?id=' + id,
+        header: { 'Content-Type': 'application/json' },
+        success: function (res) {
+          app.globalData.curplay = res.data.songs[0];
+          if (!res.data.songs[0].mp3Url) {
+            console.log("歌曲链接不存在");
+            that.setData({
+              disable: true
+            })
+          } else {
+            wx.playBackgroundAudio({
+              dataUrl: res.data.songs[0].mp3Url,
+              title: res.data.songs[0].name,
+              success: function (res) {
+                app.globalData.globalStop = false;
+              }
+            });
+            wx.setNavigationBarTitle({ title: app.globalData.curplay.name + "-" + app.globalData.curplay.artists[0].name });
+          }
+
+        }
+      });
     },
 
     loadlrc: function () {
@@ -156,7 +186,7 @@ Page({
     },
       hideAllChioce: function () {
       this.setData({
-        sortingChioceIcon: "/image/fm/icon-go-black.png",
+        sortingChioceIcon: "/image/music88.png",
         chioceSorting: false,
       });
     },
@@ -171,7 +201,7 @@ Page({
   selectSorting: function (e) {
         var index = e.currentTarget.dataset.index;
         this.setData({
-          sortingChioceIcon: "/image/fm/icon-go-black.png",
+          sortingChioceIcon: "/image/music88.png",
           activeSortingIndex: index,
           activeSortingName: this.data.sortingList[index].value,
           productList: [],
@@ -211,7 +241,7 @@ Page({
     })
   },
 
-  //添加搜索记录并搜索
+  //添加当前播放记录到缓存
   setPlayStorage: function () {
     var that = this;
     //将播放记录更新到缓存
@@ -223,6 +253,28 @@ Page({
     })
     wx.setStorageSync('playData', playData);
     that.setData({ StorageFlag: false, })
-  }
+  },
+
+  //转发
+  onShareAppMessage: (res) => {
+    if (res.from === 'view') {
+      console.log("来自页面内转发按钮");
+      console.log(res.target);
+    }
+    else {
+      console.log("来自右上角转发菜单");
+    }
+    return {
+      title: '学优优FM',
+      imageUrl: "/image/fm/music_icon.png",
+      success: (res) => {
+        console.log("转发成功", res);
+      },
+      fail: (res) => {
+        console.log("转发失败", res);
+      }
+    }
+    
+  } 
 
 })

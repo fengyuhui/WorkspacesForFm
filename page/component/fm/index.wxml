@@ -60,9 +60,12 @@
     <image id="type_image" src="../../../image/fm/music_icon.png" style = 'width: 30rpx;height:30rpx;'/> 
     <text>活力早晨</text>
     </view>
-    <view>
-      <image src="../../../image/but_share.png" style = 'width: 64rpx;height:63rpx;'/> 
+
+    <!-- 转发 -->
+    <view >
+      <button bindtap="onShareAppMessage" type="primary" open-type="share" style = 'width: 64rpx;height:63rpx;' class="playshare"/> 
     </view>
+
     </view>
     <view id="musicName" class="musicName">
     <text>美丽的多瑙河</text>
@@ -95,50 +98,25 @@
 </view>
 
 <view id = "typemiddle">
+
+<!-- 分类加载test -->
+<scroll-view class="typescroll" scroll-top = "560rpx" style="height:560rpx;" scroll-y="true" bindscroll="scrll"  bindscrolltolower="loadMore">
+  <view wx:for="{{subtypesList}}" class="types" id="types">
+      <view wx:for="{{subtypesList[index]}}" class="types" id="types">
+      <view data-id="{{item.subtypesId}}" class="energy">
+        <image src="{{item.subtypeIcon}}" />
+        <text>{{item.subtypeName}}</text>
+      </view>
+      </view>
+   </view>  
+  </scroll-view>
+
+
+
+
+
   <!-- 分类小按钮{ -->
-  <view id="types" class="types">
-    <view data-id="1" class="energy">
-        <image src="../../../image/music88.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/music88.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/music88.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/visible.png" />
-        <text>活力早晨</text>
-    </view>
-  </view>
-  <!-- 分类小按钮} -->
-
-   <!-- 分类小按钮{ -->
-  <view id="types" class="types">
-    <view data-id="1" class="energy">
-        <image src="../../../image/skyscraper.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/family11.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/books8.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/teddy.png" />
-        <text>活力早晨</text>
-    </view>
-  </view>
-  <!-- 分类小按钮} -->
-
-   <!-- 分类小按钮{ -->
-   <view id="types" class="types">
+   <!-- <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/music92.png" />
         <text>活力早晨</text>
@@ -155,29 +133,10 @@
         <image src="../../../image/fan2.png" />
         <text>活力早晨</text>
     </view>
-  </view>
+  </view> -->
   <!-- 分类小按钮} -->
+  
 
-  <!-- 分类小按钮{ -->
-   <view id="types" class="types">
-    <view data-id="1" class="energy">
-        <image src="../../../image/music92.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/abc10.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/book200.png" />
-        <text>活力早晨</text>
-    </view>
-    <view data-id="1" class="energy">
-        <image src="../../../image/fan2.png" />
-        <text>活力早晨</text>
-    </view>
-  </view>
-  <!-- 分类小按钮} -->
   </view>
 
 <view id = "typeright">
