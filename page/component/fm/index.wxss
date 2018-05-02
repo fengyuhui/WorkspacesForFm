@@ -59,7 +59,7 @@ button[class="playshare"]::after {
 
 #typeleft{position: absolute;left:40rpx;top:75%;z-index: 0;}
 #typeright{position: absolute;right:40rpx;top:75%;z-index: 0;}
-#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:58%;z-index: 0;}
+#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:53%;z-index: 0;}
 
 #ok{position: relative;margin-left:560rpx;color:#71DB46;  z-index: 2;}
 #cancel{position: reletive;margin-left:5rpx;  z-index: 2;}
