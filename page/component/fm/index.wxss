@@ -50,8 +50,8 @@ button[class="playshare"]::after {
 #musicName{flex: 1;text-align: center;position: absolute;left:0;top:34%;margin-left:10rpx;margin-top: -35rpx;width: 100%}
 .musicName text{font-size: 30rpx;color: #b0b0b0}
 
-#types{margin-top:25rpx;display: flex}
-#types view{flex: 1;text-align: center;position: relative;width: 100%;margin-top:25rpx;}
+#types{margin-top:24rpx;display: flex}
+#types view{flex: 1;text-align: center;position: relative;width: 100%;margin-top:24rpx;}
 #types image{width: 46rpx;height:46rpx;}
 #types text{position: absolute;font-size: 23rpx;left:25%;top:100%;color: #b0b0b0;margin-top:8rpx;}
 
@@ -59,7 +59,7 @@ button[class="playshare"]::after {
 
 #typeleft{position: absolute;left:40rpx;top:75%;z-index: 0;}
 #typeright{position: absolute;right:40rpx;top:75%;z-index: 0;}
-#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:52%;z-index: 0;}
+#typemiddle{position: absolute;left:75rpx;width: 600rpx;top:58%;z-index: 0;}
 
 #ok{position: relative;margin-left:560rpx;color:#71DB46;  z-index: 2;}
 #cancel{position: reletive;margin-left:5rpx;  z-index: 2;}
