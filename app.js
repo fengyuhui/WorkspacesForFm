@@ -167,7 +167,6 @@ App({
     index_am: 0,
     playtype: 1,
     curplay: {},
-    playStorage:{},
     shuffle: 1,
     globalStop: true,
     currentPosition: 0

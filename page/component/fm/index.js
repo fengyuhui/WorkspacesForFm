@@ -26,8 +26,13 @@ Page({
         sortingChioceIcon: "/image/music88.png",
         activeSortingIndex: -1,
         chioceSorting: false,
+        // playStorage: [{activeSortingIndex: 0,
+        //   activeSortingName: 0,
+        //   music_id: 0,
+        //   activeSubtypeIndex: 0}],
+        music_id: 0,
+        activeSubtypeIndex: 0,
         activeSortingName:"小学一年级",
-        playStorage: {},
         play_id:-1,
         sortingList: [{ 
           key: 1, value: "小学一年级"
@@ -75,24 +80,54 @@ Page({
         });
         
 
-        //加载历史
-        this.setData({
-          playStorage: wx.getStorageSync('playData') || [],   //调用API从本地缓存中获取数据
-          StorageFlag: true,
-          listFlag: true
-        })
+        //调用API从本地缓存中获取分类id数据
+        wx.getStorage({
+          key: 'activeSortingIndex',
+          success: function (res) {
+            if(res!=null){
+              console.log(res.data);
+              that.setData({
+              activeSortingIndex:res.data
+              });
+            }
+          }
+        });
+        //调用API从本地缓存中获取分类名称数据
+        wx.getStorage({
+          key: 'activeSortingName',
+          success: function (res) {
+            if (res != null) {
+              console.log(res.data)
+              that.setData({
+              activeSortingName:res.data
+              })
+            }
+          }
+        });
+        //调用API从本地缓存中获取分类名称数据
+        wx.getStorage({
+          key: 'activeSortingName',
+          success: function (res) {
+            if (res != null) {
+              console.log(res.data)
+              that.setData({
+              activeSortingName:res.data
+              })
+            }
+          }
+        });
 
-        if (playStorage!=[]){
-          this.setData({
-            id: playData.length,
-            activeSortingIndex: that.data.index,
-            activeSortingName: that.data.sortingList[index].value,
-            play_id: that.globalData.curplay.id
-          })
-        }
+        // 加载历史缓存
+        // if (playStorage!=[]){
+        //   this.setData({
+        //     activeSortingIndex: that.data.index,
+        //     activeSortingName: that.data.sortingList[index].value,
+        //     music_id: that.globalData.curplay.id,
+        //     activeSubtypeIndex: that.data.activeSubtypeIndex
+        //   })
+        // }
 
         var music = app.globalData.list_fm[app.globalData.index_fm];
-        var activeSortingName = "小学一年级";
         app.globalData.playtype = 2;
 
 
@@ -224,7 +259,7 @@ Page({
 
         //加载子分类列表
         wx.request({
-          url: 'https://abc.com/sortinglists?id=2',
+          url: 'https://abc.com/sortinglists?key='+index,
           success: function (res) {
             that.setData({
               //sortingList: res.data.sortingList,
@@ -233,7 +268,7 @@ Page({
           }
         });
 
-
+        //显示选择的分类
         this.setData({
           sortingChioceIcon: "/image/music88.png",
           activeSortingIndex: index,
@@ -245,6 +280,19 @@ Page({
           'currentItem': index
         })
       },
+
+//根据子类别设置播放列表，设置当前播放音乐，设置当前音乐在列表中位置
+  setplaylist: function (list, music, index) {
+    appInstance.globalData.curplay = music;
+    appInstance.globalData.index_am = index;//event.currentTarget.dataset.idx;
+    appInstance.globalData.playtype = 1;
+    var shuffle = appInstance.globalData.shuffle;
+    appInstance.globalData.list_sf = list;//this.data.list.tracks;
+    appInstance.shuffleplay(shuffle);
+    this.setData({
+      curplay: music.id
+    })
+  },
   
   ensure_type: function(e){
     chioceSorting: false,
@@ -294,13 +342,45 @@ Page({
   setPlayStorage: function () {
     var that = this;
     //将播放记录更新到缓存
-    var playData = that.data.playStorage;
-    playData.push({
-      activeSortingIndex: that.data.index,
-      activeSortingName: that.data.sortingList[index].value,
-      play_id: that.data.play_id
-    })
-    wx.setStorageSync('playData', playData);
+    
+    wx.setStorage({
+      key: 'activeSortingIndex',
+      data: that.data.activeSortingIndex,
+      success: function (res) {
+        console.log('异步保存分类id成功')
+      }
+    }),
+      wx.setStorage({
+        key: 'music_id',
+        data: that.data.music_id,
+        success: function (res) {
+          console.log('异步保存音乐id成功')
+        }
+      }),
+      wx.setStorage({
+        key: 'activeSortingName',
+        data: that.data.sortingList[index].value,
+      success: function (res) {
+        console.log('异步保存分类名称成功')
+      }
+    }),
+
+      wx.setStorage({
+        key: 'activeSubtypeIndex',
+        data: that.data.activeSubtypeIndex,
+          success: function (res) {
+            console.log('异步保存子分类id成功')
+          }
+      }),
+      // var playData = that.data.playStorage;
+    // playData.push({
+    //   activeSortingIndex: that.data.index,
+    //   activeSortingName: that.data.sortingList[index].value,
+    //   music_id: that.data.music_id,
+    //   activeSubtypeIndex: that.data.activeSubtypeIndex
+    // })
+
+    //wx.setStorageSync('playData', playData);
     that.setData({ StorageFlag: false, })
   },
 
