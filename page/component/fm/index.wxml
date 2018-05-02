@@ -20,19 +20,7 @@
 
 
   <!-- 列表选项{ -->
-     <!-- <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
-    <view class="sorting-item">
-    <text id = "cancel">取消</text>
-    <text id = "ok" >确定</text>
-    </view>
-    <scroll-view scroll-y = "true" scroll-top = "500rpx"> 
-      <view wx:for="{{sortingList}}" catchtap="selectSorting" data-index="{{index}}" class="sorting-item" hover-class="click-once">
-      {{item.value}}
-      </view>
-      </scroll-view>
-  </view>  -->
-
- <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
+  <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
     <view class="sorting-item">
     <text id = "cancel">取消</text>
     <text id = "ok" bindtap='ensure_type'>确定</text>
@@ -47,12 +35,8 @@
       <view class="sorting-item">
       </view>
 </view> 
-
-
-
   <!-- 列表选项} -->
-   <!-- <view id="fm-covermain" style='background:url("img/play_bj.png");-webkit-background-size:cover;'> -->
-
+ 
    <!-- 播放{ -->
    <view id="fm-covermain">
     <view id="title" class="title">
@@ -73,7 +57,7 @@
     <view id="fm-fixed">
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
-      <view bindtap="beforeplay" id = "switchleft">
+      <view bindtap="playother" data-other="-1" id = "switchleft">
         <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
       <view bindtap="play" id = "switchmiddle" hidden="{{!playing}}">
@@ -82,7 +66,7 @@
       <view bindtap="play" id = "switchmiddle" hidden="{{playing}}">
         <image src="../../../image/fm/play_start.png" style = 'width: 162rpx;height:80rpx;'/>
       </view>
-      <view bindtap="nextplay"  id = "switchright">
+      <view bindtap="playother"  data-other="1" id = "switchright">
         <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
     </view>

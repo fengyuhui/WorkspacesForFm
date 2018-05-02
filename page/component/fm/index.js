@@ -1,6 +1,18 @@
 var common = require('../../../utils/util.js');
 let app = getApp();
 let seek = 0;
+let defaultdata = {
+  playing: false,
+  music: {},
+  playtime: '00:00',
+  duration: '00:00',
+  percent: 1,
+  lrc: [],
+  commentscount: 0,
+  lrcindex: 0,
+  showlrc: false,
+  disable: false
+};
 Page({
     data: {
         userInfo: {},
@@ -51,9 +63,9 @@ Page({
           })
         });
 
-        //加载列表
+        //加载类别列表
         wx.request({
-          url: 'https://abc.com/sortinglists?id=2',
+          url: 'https://abc.com/getSortinglists',
           success: function (res) {
             that.setData({
               //sortingList: res.data.sortingList,
@@ -184,7 +196,14 @@ Page({
             playing: false,
             showlrc: false
         })
-        app.nextfm();
+        app.nextplay();
+    },
+
+    //切换音频
+    playother: function (e) {
+      var type = e.currentTarget.dataset.other;
+      this.setData(defaultdata);
+      app.nextplay(type);
     },
       hideAllChioce: function () {
       this.setData({
@@ -199,9 +218,22 @@ Page({
         });
       },
 
-        //综合排序
+        //选择分类
   selectSorting: function (e) {
         var index = e.currentTarget.dataset.index;
+
+        //加载子分类列表
+        wx.request({
+          url: 'https://abc.com/sortinglists?id=2',
+          success: function (res) {
+            that.setData({
+              //sortingList: res.data.sortingList,
+              subtypesList: res.data.subtypesList ,
+            });
+          }
+        });
+
+
         this.setData({
           sortingChioceIcon: "/image/music88.png",
           activeSortingIndex: index,
