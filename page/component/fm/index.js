@@ -3,6 +3,7 @@ let app = getApp();
 let seek = 0;
 Page({
     data: {
+        userInfo: {},
         music: {},
         playtime: "00:00",
         duration: "00:00",
@@ -14,6 +15,8 @@ Page({
         activeSortingIndex: -1,
         chioceSorting: false,
         activeSortingName:"小学一年级",
+        playStorage: {},
+        play_id:-1,
         sortingList: [{ 
           key: 1, value: "小学一年级"
         }, {
@@ -28,11 +31,54 @@ Page({
           key: 6, value: "小学六年级"
         }], 
     },
+    //事件处理函数  
+    bindViewTap: function () {
+      wx.navigateTo({
+        url: '../logs/logs'
+      })
+    },
     onLoad: function () {
+        var that = this;
+
+        app.getUserInfo(function (userInfo) {
+          //更新数据  
+          that.setData({
+            userInfo: userInfo
+          })
+        });
+         
+        //加载列表
+        wx.request({
+          url: 'https://n.sqaiyan.com/sortinglists?id=2',
+          success: function (res) {
+            that.setData({
+              sortingList: res.data.sortingList,
+            });
+          }
+        });
+        
+
+        //加载历史
+        this.setData({
+          playStorage: wx.getStorageSync('playData') || [],   //调用API从本地缓存中获取数据
+          StorageFlag: true,
+          listFlag: true
+        })
+
+        if(playStorage!=[]){
+          this.setData({
+            id: playData.length,
+            activeSortingIndex: that.data.index,
+            activeSortingName: that.data.sortingList[index].value,
+            play_id: that.globalData.curplay.id
+          })
+        }
+
         var music = app.globalData.list_fm[app.globalData.index_fm];
         var activeSortingName = "小学一年级";
         app.globalData.playtype = 2;
-        var that = this;
+
+
         if (music) {
             this.setData({
                 music: music,
@@ -47,6 +93,15 @@ Page({
             app.nextfm();
         }
     },
+    getUserInfo: function (e) {
+      console.log(e)
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+    },
+
     loadlrc: function () {
         common.loadlrc(this);
     },
@@ -132,7 +187,7 @@ Page({
       this.setData({
         chioceSorting:false
       })
-      },
+    },
       
   scrll: function (e) {
     var scrollTop = e.detail.scrollTop
@@ -154,5 +209,20 @@ Page({
       scrollTop: 0,
       hidden: true
     })
+  },
+
+  //添加搜索记录并搜索
+  setPlayStorage: function () {
+    var that = this;
+    //将播放记录更新到缓存
+    var playData = that.data.playStorage;
+    playData.push({
+      activeSortingIndex: that.data.index,
+      activeSortingName: that.data.sortingList[index].value,
+      play_id: that.data.play_id
+    })
+    wx.setStorageSync('playData', playData);
+    that.setData({ StorageFlag: false, })
   }
+
 })

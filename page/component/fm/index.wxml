@@ -2,9 +2,9 @@
 <view id="playingpage">
 
   <!-- 用户信息{ -->
-    <view id="user" style="background-image:url({{user.backgroundUrl}})">
+    <view bindtap="bindViewTap" id="user" style="background-image:url({{userInfo.backgroundUrl}})">
     <view id="user_info">
-      <image id="user_ava" class="user_avator" src="{{user.avatarUrl}}" />
+      <image id="user_ava" class="user_avator" src="{{userInfo.avatarUrl}}" />
     </view>
 
     <!-- 选择分类{ -->
