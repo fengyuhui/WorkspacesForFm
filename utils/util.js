@@ -97,18 +97,17 @@ function playAlrc(that, app) {
     that.setData({
       music: app.globalData.curplay,
       showlrc: false,
-      duration: formatduration(app.globalData.duration)
+      duration: formatduration(app.globalData.curplay.duration)
     });
     console.log("not match");
     wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
   }
   wx.getBackgroundAudioPlayerState({
     complete: function (res) {
-      var time = 0, playing = false, playtime = 0, duration = 0;
+      var time = 0, playing = false, playtime = 0;
       if (res.status != 2) {
         time = res.currentPosition / res.duration * 100;
-        playtime = res.currentPosition;    
-        duration = res.duration;
+        playtime = res.currentPosition;   
       } if (res.status == 1) {
         playing = true;
       }
