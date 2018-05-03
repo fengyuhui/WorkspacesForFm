@@ -81,11 +81,10 @@
 <image src="../../../image/fm/more_left.png" style = 'width: 15rpx;height:24rpx;'/>
 </view>
 
+
 <view id = "typemiddle">
 
 <!-- 分类加载-->
-<view class="typescoveritem">
-</view>
 
 <scroll-view class="typescroll" style="height:530rpx" scroll-y="true" bindscroll="typescrll">
   <view wx:for="{{subtypesList}}" class="types" id="types" wx:for-item="father" >

@@ -244,6 +244,7 @@ Page({
 
           //假设数据test
           console.log("获取成功");
+
           wx.playBackgroundAudio({
 
             dataUrl: 'https://t1.aixinxi.net/o_1cciqnctd7tqqa41isru211uc7c.mp3',
@@ -256,7 +257,6 @@ Page({
                 music_title: "啦啦啦",
                 playing: true
               })
-
             }
           });
           wx.setNavigationBarTitle({

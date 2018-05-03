@@ -99,6 +99,7 @@ function playAlrc(that, app) {
       showlrc: false,
       duration: formatduration(app.globalData.duration)
     });
+    console.log("not match");
     wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
   }
   wx.getBackgroundAudioPlayerState({
@@ -106,8 +107,7 @@ function playAlrc(that, app) {
       var time = 0, playing = false, playtime = 0, duration = 0;
       if (res.status != 2) {
         time = res.currentPosition / res.duration * 100;
-        playtime = res.currentPosition;
-        app.globalData.duration = res.duration;      
+        playtime = res.currentPosition;    
         duration = res.duration;
       } if (res.status == 1) {
         playing = true;
@@ -115,8 +115,7 @@ function playAlrc(that, app) {
       that.setData({
         playtime: formatduration(playtime * 1000),
         percent: time,
-        playing: playing,
-        duration: formatduration(duration * 1000)
+        playing: playing
       })
     }
   });
