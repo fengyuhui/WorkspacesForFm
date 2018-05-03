@@ -14,6 +14,7 @@ App({
     });
 
   },
+  
   nextplay: function (t) {
     //播放列表中下一首
     this.preplay();
@@ -29,6 +30,8 @@ App({
     this.globalData.index_am = index;
     this.seekmusic(1)
   },
+
+
   nextfm: function () {
     //下一首fm
     this.preplay()
@@ -53,6 +56,8 @@ App({
     this.globalData.globalStop = true;
     wx.stopBackgroundAudio();
   },
+
+
   getfm: function () {
     var that = this;
     console.log("重新获取")
@@ -67,6 +72,8 @@ App({
       }
     })
   },
+
+
   stopmusic: function (type, cb) {
     var that = this;
     wx.pauseBackgroundAudio();
@@ -76,6 +83,8 @@ App({
       }
     })
   },
+
+  //暂停后播放
   seekmusic: function (type, cb, seek) {
     console.log("type:",type)
     var that = this;
@@ -83,7 +92,7 @@ App({
     this.globalData.playtype = type;
     if (type == 1) {
       wx.request({
-        url: 'https://n.sqaiyan.com/song?id=' + that.globalData.curplay.id,
+        url: that.globalData.homeUrl+'/getSong?id=' + that.globalData.curplay.id,
         success: function (res) {
           if (!res.data.songs[0].mp3Url) {
             that.nextplay(1);
@@ -171,10 +180,9 @@ App({
     shuffle: 1,
     globalStop: true,
     currentPosition: 0,
-
-    music_id:-1,
     activeSortingIndex: 0,
-    activeSortingName: "小学一年级",
-    activeSubtypeIndex: -1
+    activeSortingName: "",
+    activeSubtypeIndex: -1,
+    activeSubtypeName:""
   }
 })

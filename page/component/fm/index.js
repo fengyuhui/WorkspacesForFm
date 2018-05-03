@@ -17,14 +17,27 @@ Page({
         duration: "00:00",
         percent: 1,
         imgload: false,
-        playing: true,
+        playing: false,
         commentscount: 0,
         sortingChioceIcon: "/image/music88.png",
 
-        music_id: -1,
+        music_title:"美丽的多瑙河",
+
         activeSortingIndex: 0,
         activeSortingName: "小学一年级",
         activeSubtypeIndex: -1,
+        activeSubtypeName:"",
+
+        //判断缓存是否已经读完
+        // flag_sortId:false,
+        // flage_sortName:false,
+        // flag_subtypeId:false,
+        // flag_subtypeName:false,
+        // flag_music_id:false,
+
+        //判断是否有缓存
+        flag_storage:false,
+
 
         chioceSorting: false,
         // playStorage: [{activeSortingIndex: 0,
@@ -79,67 +92,56 @@ Page({
           }
         });
         
-
         //调用API从本地缓存中获取分类id数据
-        wx.getStorage({
-          key: 'activeSortingIndex',
-          success: function (res) {
-            if(res!=null){
-              console.log(res.data);
-              app.globalData.activeSortingIndex=res.data;
+        if (wx.getStorageSync('activeSortingIndex') != null) {
+          app.globalData.activeSortingIndex = wx.getStorageSync('activeSortingIndex');
+          console.log("读取分类id缓存成功" + app.globalData.activeSortingIndex);
+          that.setData({
+            activeSortingIndex: app.globalData.activeSortingIndex,
+            flag_storage: true
+          });
+        }
 
-              that.setData({
-                activeSortingIndex:res.data
-              });
-
-            }
-          }
-        });
         //调用API从本地缓存中获取分类名称数据
-        wx.getStorage({
-          key: 'activeSortingName',
-          success: function (res) {
-            if (res != null) {
-              console.log(res.data);
-              app.globalData.activeSortingName=res.data;
+        if (wx.getStorageSync('activeSortingName')!=null){
+          app.globalData.activeSortingName = wx.getStorageSync('activeSortingName');
+          console.log("读取分类名称缓存成功" + app.globalData.activeSortingName);
+          that.setData({
+            activeSortingName: wx.getStorageSync('activeSortingName'),
+            flag_storage: true
+          });
+        }
 
-              that.setData({
-                activeSortingName: res.data
-              });
-
-            }
-          }
-        });
         //调用API从本地缓存中获取子分类id数据
-        wx.getStorage({
-          key: 'activeSubtypeIndex',
-          success: function (res) {
-            if (res != null) {
-              console.log(res.data);
-              app.globalData.activeSubtypeIndex = res.data;
+        if (wx.getStorageSync('activeSubtypeIndex')!=null){
+          app.globalData.activeSubtypeIndex = wx.getStorageSync('activeSubtypeIndex');
+          console.log("读取子分类id缓存成功" + app.globalData.activeSubtypeIndex);
+          that.setData({
+            flag_storage: true,
+            activeSubtypeIndex: app.globalData.activeSubtypeIndex
+          });
+        }
+        
 
-              that.setData({
-                activeSubtypeIndex: res.data
-              });
+        //调用API从本地缓存中获取子分类名称数据
+        if (wx.getStorageSync('activeSubtypeName')!=null){
+          app.globalData.activeSubtypeName = wx.getStorageSync('activeSubtypeName');
+          console.log("读取子分类名称缓存成功" + app.globalData.activeSubtypeName);
+          that.setData({
+            flag_storage: true,
+            activeSubtypeName: app.globalData.activeSubtypeName
+          });
+        };
 
-            }
-          }
-        });
+
         //调用API从本地缓存中获取音乐id数据
-        wx.getStorage({
-          key: 'music_id',
-          success: function (res) {
-            if (res != null) {
-              console.log(res.data);
-              app.globalData.music_id= res.data;
-
-              that.setData({
-                music_id: res.data
-              });
-
-            }
-          }
-        });
+        if (wx.getStorageSync('music_id') != null) {
+          app.globalData.curplay.music_id = wx.getStorageSync('music_id');
+          console.log("读取子分类名称缓存成功" + app.globalData.curplay.music_id);
+          that.setData({
+            flag_storage: true
+          });
+        };
 
         // 加载历史缓存
         // if (playStorage!=[]){
@@ -151,10 +153,12 @@ Page({
         //   })
         // }
 
-        if (app.globalData.music_id==-1){ //没有音乐缓存，加载第一个分类的子分类，并等用户点击子分类再播放
+        if (!that.data.flag_storage){ //没有音乐缓存，加载第一个分类的子分类，并等用户点击子分类再播放
           //没有音乐播放
+          console.log("that" + that.data.flag_storage);
           app.globalData.globalStop = true;
           wx.stopBackgroundAudio();
+          console.log("name" + app.globalData.activeSortingName);
 
           //加载子分类列表
           wx.request({
@@ -181,8 +185,16 @@ Page({
         }
         //有音乐缓存则播放之前的音乐
         else{
-          playMusic(app.globalData.music_id);
+          this.playMusic(app.globalData.curplay.music_id);
         }
+
+        /**
+             * 监听音乐停止
+             */
+        wx.onBackgroundAudioStop(function () {
+          console.log('onBackgroundAudioStop')
+          playother(app.globalData.curplay.music_id, app.globalData.activeSubtypeIndex,1);
+        })
         
     },
     getUserInfo: function (e) {
@@ -212,6 +224,12 @@ Page({
               title: res.data.songs[0].name,
               success: function (res) {
                 app.globalData.globalStop = false;
+                this.setPlayStorage();//存缓存
+                that.setData({
+                  music_title: res.data.songs[0].name,
+                  playing:true
+                })
+                
               }
             });
             wx.setNavigationBarTitle({ title: app.globalData.curplay.name 
@@ -250,6 +268,8 @@ Page({
             imgload: true
         })
     },
+
+    //暂停和播放
     play: function (m) {
         var that = this
         if (this.data.playing) {
@@ -263,6 +283,7 @@ Page({
             }, app.globalData.currentPosition);
         }
     },
+
     nextplay: function () {
         this.setData({
             imgload: true,
@@ -273,15 +294,51 @@ Page({
             playing: false,
             showlrc: false
         })
-        app.nextplay();
+        app.preplay();
+ 
+        app.globalData.curplay = list[index] || {};
+
     },
 
     //切换音频
-    playother: function (e) {
+    playother: function (e) { //signal为1时下一首，为-1时上一首
+      this.setPlayStorage();//存缓存
       var type = 1;
-      this.setData(defaultdata);
-      app.nextplay(type);
+      var signal = e.currentTarget.dataset.signal;
+      console.log("signal"+signal);
+      this.setData({
+        imgload: true,
+        playtime: common.formatduration(0),
+        percent: .1,
+        music: {},
+        commentscount: 0,
+        playing: false,
+        showlrc: false
+      }) //音频数据清空
+     
+      //加载下一播放音频id
+      wx.request({
+        url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+ +'&music_id=' + app.globalData.curplay.music_id+'&signal='+signal,
+        success: function (res) {
+          app.globalData.curplay.music_id = res.data.music_id; 
+          app.globalData.activeSortingIndex = res.data.sorting_id;
+          app.globalData.activeSubtypeIndex = res.data.subtype_id;
+          app.globalData.activeSortingName = res.data.sorting_name;
+
+          this.setData({//把分类和子类都刷新一下
+            activeSortingIndex: res.data.sorting_id,
+            activeSortingName: res.data.sorting_name,
+            activeSubtypeIndex: res.data.subtype_id,
+            activeSubtypeName: res.data.subtype_name,
+            
+          });
+
+          //播放新音频
+          playMusic(app.globalData.curplay.music_id);
+        }
+      });
     },
+
       hideAllChioce: function () {
       this.setData({
         sortingChioceIcon: "/image/music88.png",
@@ -301,10 +358,9 @@ Page({
 
         //加载子分类列表
         wx.request({
-          url: 'https://abc.com/getSubtypelist?key=' + this.data.sortingList[index].key,
+          url: app.globalData.homeUrl+'/getSubtypelist?key=' + this.data.sortingList[index].key,
           success: function (res) {
             that.setData({
-              //sortingList: res.data.sortingList,
               subtypesList: res.data.subtypesList ,
             });
           }
@@ -328,44 +384,52 @@ Page({
 
   //选择子分类
   choiceSub: function (e) {
-    var index = e.currentTarget.dataset.dataid;
-
-    //加载子分类列表
-    wx.request({
-      url: 'https://abc.com/getSubtypelist?key=' + this.data.sortingList[index].subtypesId,
-      success: function (res) {
-        that.setData({
-          subtypesList: res.data.subtypesList,
-        });
-      }
-    });
-
+    var obj = e.currentTarget.dataset.obj;
+    var index = e.currentTarget.index;
     //显示选择的子分类
     this.setData({
       sortingChioceIcon: "/image/music88.png",
-      activeSortingIndex: index,
-      activeSortingName: this.data.sortingList[index].value,
-      productList: [],
+      activeSubtypeIndex: obj.subtypesId,
+      activeSubtypeName: obj.subtypeName,
       pageIndex: 1,
       loadOver: false,
       isLoading: true,
     })
+    console.log("subtypeName" + obj.subtypeName);
+
+    //根据子分类来获取音频：
+
+    var that = this;
+    wx.request({
+      url: app.globalData.homeUrl + '/getFirstSong?id=' + obj.subtypesId,
+      header: { 'Content-Type': 'application/json' },
+      success: function (res) {
+        app.globalData.curplay = res.data.songs[0];
+        if (!res.data.songs[0].mp3Url) {
+          console.log("mp3链接不存在");
+          that.setData({
+            disable: true
+          })
+        } else {
+          wx.playBackgroundAudio({
+            dataUrl: res.data.songs[0].mp3Url,
+            title: res.data.songs[0].name,
+            success: function (res) {
+              app.globalData.globalStop = false;
+              that.setData({
+                playing: true
+              })
+            }
+          });
+          wx.setNavigationBarTitle({
+            title: app.globalData.curplay.name
+            // + "-" + app.globalData.curplay.artists[0].name 
+          });
+        }
+      }
+    });
   },
 
-
-//根据子类别设置播放列表，设置当前播放音乐，设置当前音乐在列表中位置
-  setplaylist: function (list, music, index) {
-    appInstance.globalData.curplay = music;
-    appInstance.globalData.index_am = index;//event.currentTarget.dataset.idx;
-    appInstance.globalData.globalStop = true;
-    var shuffle = appInstance.globalData.shuffle;
-    appInstance.globalData.list_sf = list;//this.data.list.tracks;
-    appInstance.shuffleplay(shuffle);
-    this.setData({
-      curplay: music.id
-    })
-  },
-  
   ensure_type: function(e){
     chioceSorting: false,
       this.setData({
@@ -413,6 +477,7 @@ Page({
   //添加当前播放记录到缓存
   setPlayStorage: function () {
     //将播放记录更新到缓存
+    var that = this;
     
     wx.setStorage({
       key: 'activeSortingIndex',
@@ -423,14 +488,14 @@ Page({
     }),
       wx.setStorage({
         key: 'music_id',
-        data: that.data.music_id,
+        data: app.globalData.curplay.music_id,
         success: function (res) {
           console.log('异步保存音乐id成功')
         }
       }),
       wx.setStorage({
         key: 'activeSortingName',
-        data: that.data.sortingList[index].value,
+        data: that.data.activeSortingName,
       success: function (res) {
         console.log('异步保存分类名称成功')
       }
@@ -443,6 +508,15 @@ Page({
             console.log('异步保存子分类id成功')
           }
       }),
+
+      wx.setStorage({
+      key: 'activeSubtypeName',
+      data: that.data.activeSubtypeName,
+      success: function (res) {
+        console.log('异步保存子分类名称成功')
+      }
+    }),
+
       // var playData = that.data.playStorage;
     // playData.push({
     //   activeSortingIndex: that.data.index,
@@ -466,7 +540,6 @@ Page({
     }
     return {
       title: '学优优FM',
-      imageUrl: "/image/fm/music_icon.png",
       success: (res) => {
         console.log("转发成功", res);
       },

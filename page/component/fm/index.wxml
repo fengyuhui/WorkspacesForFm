@@ -42,7 +42,7 @@
     <view id="title" class="title">
     <view id="type">
     <image id="type_image" src="../../../image/fm/music_icon.png" style = 'width: 30rpx;height:30rpx;'/> 
-    <text>活力早晨</text>
+    <text>{{activeSubtypeName}}</text>
     </view>
 
     <!-- 转发 -->
@@ -52,12 +52,12 @@
 
     </view>
     <view id="musicName" class="musicName">
-    <text>美丽的多瑙河</text>
+    <text>{{music_title}}</text>
     </view>
     <view id="fm-fixed">
     <template is="playingpercent" data="{{playtime:playtime,percent:percent,duration:duration}}" />
     <view id="fm-action">
-      <view bindtap="playother" data-other="-1" id = "switchleft">
+      <view bindtap="playother" data-signal="-1" id = "switchleft">
         <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
       <view bindtap="play" id = "switchmiddle" hidden="{{!playing}}">
@@ -66,7 +66,7 @@
       <view bindtap="play" id = "switchmiddle" hidden="{{playing}}">
         <image src="../../../image/fm/play_start.png" style = 'width: 162rpx;height:80rpx;'/>
       </view>
-      <view bindtap="playother"  data-other="1" id = "switchright">
+      <view bindtap="playother"  data-signal="1" id = "switchright">
         <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
     </view>
@@ -88,9 +88,9 @@
 </view>
 
 <scroll-view class="typescroll" style="height:530rpx" scroll-y="true" bindscroll="typescrll">
-  <view wx:for="{{subtypesList}}" class="types" id="types">
-      <view wx:for="{{subtypesList[index]}}" class="types" id="types">
-      <view data-id="{{item.subtypesId}}" class="energy" bindtap="choiceSub">
+  <view wx:for="{{subtypesList}}" class="types" id="types" wx:for-item="father" >
+      <view wx:for="{{father}}" class="types" id="types" >
+      <view data-id="{{item.subtypesId}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
         <image src="{{item.subtypeIcon}}" />
         <text>{{item.subtypeName}}</text>
       </view>
