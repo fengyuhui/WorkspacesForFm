@@ -93,36 +93,22 @@ function playAlrc(that, app) {
     });
     return;
   }
-  if (that.data.music.id != app.globalData.curplay.id) {
+  if (that.data.music.id != app.globalData.curplay.music_id) {
     that.setData({
       music: app.globalData.curplay,
-      lrc: [],
       showlrc: false,
-      lrcindex: 0,
-      duration: formatduration(app.globalData.curplay.duration)
+      duration: formatduration(app.globalData.duration)
     });
-    wx.setNavigationBarTitle({ title: app.globalData.curplay.name + "-" + app.globalData.curplay.artists[0].name });
-    loadrec(0, 0, that.data.music.commentThreadId, function (res) {
-      that.setData({
-        commentscount: res.total
-      })
-    })
+    wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
   }
   wx.getBackgroundAudioPlayerState({
     complete: function (res) {
-      var time = 0, lrcindex = that.data.lrcindex, playing = false, playtime = 0;
+      var time = 0, playing = false, playtime = 0, duration = 0;
       if (res.status != 2) {
         time = res.currentPosition / res.duration * 100;
         playtime = res.currentPosition;
-        if (that.data.showlrc && !that.data.lrc.scroll) {
-          for (let i in that.data.lrc.lrc) {
-            var se = that.data.lrc.lrc[i];
-            if (se.lrc_sec <= res.currentPosition) {
-              lrcindex = i
-            }
-          }
-        };
-
+        app.globalData.duration = res.duration;      
+        duration = res.duration;
       } if (res.status == 1) {
         playing = true;
       }
@@ -130,7 +116,7 @@ function playAlrc(that, app) {
         playtime: formatduration(playtime * 1000),
         percent: time,
         playing: playing,
-        lrcindex: lrcindex
+        duration: formatduration(duration * 1000)
       })
     }
   });

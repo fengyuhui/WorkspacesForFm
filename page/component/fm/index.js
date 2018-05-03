@@ -73,6 +73,7 @@ Page({
     onLoad: function () {
         var that = this;
         
+        this.playMusic(1);
 
         app.getUserInfo(function (userInfo) {
           //更新数据  
@@ -185,15 +186,15 @@ Page({
         }
         //有音乐缓存则播放之前的音乐
         else{
-          this.playMusic(app.globalData.curplay.music_id);
+          that.playMusic(app.globalData.curplay.music_id);
         }
 
         /**
-             * 监听音乐停止
+             * 监听音乐自然播完停止
              */
         wx.onBackgroundAudioStop(function () {
           console.log('onBackgroundAudioStop')
-          playother(app.globalData.curplay.music_id, app.globalData.activeSubtypeIndex,1);
+          that.playother(1);
         })
         
     },
@@ -219,6 +220,7 @@ Page({
               disable: true
             })
           } else {
+            console.log("获取成功");
             wx.playBackgroundAudio({
               dataUrl: res.data.songs[0].mp3Url,
               title: res.data.songs[0].name,
@@ -232,10 +234,34 @@ Page({
                 
               }
             });
-            wx.setNavigationBarTitle({ title: app.globalData.curplay.name 
-            // + "-" + app.globalData.curplay.artists[0].name 
-            });
+            wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
           }
+        },
+        fail: function(e){
+          console.log("获取失败");
+
+
+
+          //假设数据test
+          console.log("获取成功");
+          wx.playBackgroundAudio({
+
+            dataUrl: 'https://t1.aixinxi.net/o_1cciqnctd7tqqa41isru211uc7c.mp3',
+            title: "啦啦啦",
+
+            success: function (res) {
+              app.globalData.globalStop = false;
+              that.setPlayStorage();//存缓存
+              that.setData({
+                music_title: "啦啦啦",
+                playing: true
+              })
+
+            }
+          });
+          wx.setNavigationBarTitle({
+            title: "啦啦啦"
+          });
         }
       });
     },
@@ -243,16 +269,16 @@ Page({
     // loadlrc: function () {
     //     common.loadlrc(this);
     // },
-    // onShow: function () {
-    //     var that = this;
-    //     if (app.globalData.playtype == 1) {
-    //         app.nextfm();
-    //     }
-    //     seek = setInterval(function () {
-    //         common.playAlrc(that, app)
-    //     }, 1000);
-    //   //  wx.setNavigationBarTitle({ title: app.globalData.curplay.name + "-" + app.globalData.curplay.artists[0].name || "" });
-    // },
+    onShow: function () {
+        var that = this;
+        if (app.globalData.playtype == 1) {
+            app.nextfm();
+        }
+        seek = setInterval(function () {
+            common.playAlrc(that, app)
+        }, 1000);
+      //  wx.setNavigationBarTitle({ title: app.globalData.curplay.name + "-" + app.globalData.curplay.artists[0].name || "" });
+    },
     onHide: function () {
         clearInterval(seek);
         setPlayStorage();
@@ -288,6 +314,7 @@ Page({
         this.setData({
             imgload: true,
             playtime: common.formatduration(0),
+            duration: common.formatduration(0),
             percent: .1,
             music: {},
             commentscount: 0,
@@ -304,11 +331,17 @@ Page({
     playother: function (e) { //signal为1时下一首，为-1时上一首
       this.setPlayStorage();//存缓存
       var type = 1;
-      var signal = e.currentTarget.dataset.signal;
+      if(e == 1){
+        var signal = 1;
+      }
+      else{
+        var signal = e.currentTarget.dataset.signal;
+      }
       console.log("signal"+signal);
       this.setData({
         imgload: true,
         playtime: common.formatduration(0),
+        duration: common.formatduration(0),
         percent: .1,
         music: {},
         commentscount: 0,
@@ -549,5 +582,4 @@ Page({
     }
     
   } 
-
 })

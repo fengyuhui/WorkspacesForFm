@@ -183,6 +183,7 @@ App({
     activeSortingIndex: 0,
     activeSortingName: "",
     activeSubtypeIndex: -1,
-    activeSubtypeName:""
+    activeSubtypeName:"",
+    duration: '00:00'
   }
 })
