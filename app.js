@@ -160,15 +160,21 @@ App({
   globalData: {
     userInfo: null,
     hasLogin: false,
+    homeUrl:"https://abc.com", 
     list_am: [],
     list_fm: [],
     list_sf: [],
     index_fm: 0,
     index_am: 0,
-    playtype: 1,
+    playtype: 1, //播放音频
     curplay: {},
     shuffle: 1,
     globalStop: true,
-    currentPosition: 0
+    currentPosition: 0,
+
+    music_id:-1,
+    activeSortingIndex: 0,
+    activeSortingName: "小学一年级",
+    activeSubtypeIndex: -1
   }
 })

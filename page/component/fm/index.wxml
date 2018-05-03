@@ -83,11 +83,14 @@
 
 <view id = "typemiddle">
 
-<!-- 分类加载test -->
+<!-- 分类加载-->
+<view class="typescoveritem">
+</view>
+
 <scroll-view class="typescroll" style="height:530rpx" scroll-y="true" bindscroll="typescrll">
   <view wx:for="{{subtypesList}}" class="types" id="types">
       <view wx:for="{{subtypesList[index]}}" class="types" id="types">
-      <view data-id="{{item.subtypesId}}" class="energy">
+      <view data-id="{{item.subtypesId}}" class="energy" bindtap="choiceSub">
         <image src="{{item.subtypeIcon}}" />
         <text>{{item.subtypeName}}</text>
       </view>
