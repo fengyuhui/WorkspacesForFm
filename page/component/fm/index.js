@@ -209,6 +209,12 @@ Page({
 
     playMusic: function (id) {
       var that = this;
+
+      //无接口测试，要删的！！
+      that.setData({
+        duration: common.formatduration(176000)
+      })
+
       wx.request({
         url: app.globalData.homeUrl +'/getSong?id=' + id,
         header: { 'Content-Type': 'application/json' },
@@ -222,14 +228,15 @@ Page({
           } else {
             console.log("获取成功");
             wx.playBackgroundAudio({
-              dataUrl: res.data.songs[0].mp3Url,
-              title: res.data.songs[0].name,
+              dataUrl: app.globalData.curplay.mp3Url,
+              title: app.globalData.curplay.name,
               success: function (res) {
                 app.globalData.globalStop = false;
                 this.setPlayStorage();//存缓存
                 that.setData({
-                  music_title: res.data.songs[0].name,
-                  playing:true
+                  music_title: app.globalData.curplay.name,
+                  playing:true,
+                  duration: common.formatduration(app.globalData.curplay.duration)
                 })
                 
               }
@@ -257,6 +264,8 @@ Page({
                 music_title: "啦啦啦",
                 playing: true
               })
+
+              console.log("duration" + that.data.duration);
             }
           });
           wx.setNavigationBarTitle({
