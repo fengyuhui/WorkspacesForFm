@@ -236,7 +236,7 @@ Page({
                 that.setData({
                   music_title: app.globalData.curplay.name,
                   playing:true,
-                  duration: common.formatduration(app.globalData.curplay.duration)
+                  duration: common.formatduration(app.globalData.curplay.duration * 1000)
                 })
                 
               }
