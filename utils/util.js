@@ -94,6 +94,7 @@ function playAlrc(that, app) {
     return;
   }
   if (that.data.music.id != app.globalData.curplay.music_id) {
+    app.globalData.currentPosition=0;
     that.setData({
       music: app.globalData.curplay,
       showlrc: false,

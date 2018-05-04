@@ -343,7 +343,7 @@ Page({
       })
 
       var type = 1;
-      if(e == 1){
+      if(e == 1){//自然播放完
         var signal = 1;
       }
       else{
@@ -385,9 +385,9 @@ Page({
           //无法获取新音频
           wx.showToast({title: '获取失败',
             duration: 1000,
+            icon: 'loading',
             mask:true}
             );
-          //that.playMusic(1);
         }
       });
     },
@@ -483,6 +483,18 @@ Page({
             title: app.globalData.curplay.name
           });
         }
+      },
+      fail:function(e){
+        that.playMusic(1);
+
+        //无法获取新音频
+        wx.showToast({
+          title: '获取失败',
+          duration: 1000,
+          icon: 'loading',
+          mask: true
+        }
+        );
       }
     });
   },
