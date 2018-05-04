@@ -50,10 +50,10 @@ button[class="playshare"]::after {
 #musicName{flex: 1;text-align: center;position: absolute;left:0;top:34%;margin-left:10rpx;margin-top: -35rpx;width: 100%}
 .musicName text{font-size: 30rpx;color: #b0b0b0}
 
-#types{display: flex}
-#types view{flex: 1;text-align: center;position: relative;width: 100%;margin-top:34rpx;}
-#types image{width: 46rpx;height:46rpx;}
-#types text{position: absolute;font-size: 23rpx;left:25%;top:100%;color: #b0b0b0;margin-top:8rpx;}
+#types{display: flex;width: 100%;height: 125rpx;padding-top:0rpx;margin-top:0}
+#stypes{flex: 1;text-align: center;position: relative;width: 100%;margin-top:44rpx;margin-left:10rpx;}
+#stypes image{width: 46rpx;height:46rpx;}
+#stypes text{position: absolute;font-size: 24rpx;left:25%;top:70%;color: #b0b0b0;margin-top:8rpx;}
 
 #subtypes{border-top:1rpx solid #efefef;margin-top:0rpx;z-index: 0;}
 
@@ -188,5 +188,12 @@ button[class="playshare"]::after {
 
 .typescroll{
   z-index: 0;
+  position: relative;
+}
+
+#st{
+  z-index: 0;
+  margin-top:30rpx;
+  position: relative;
 }
 

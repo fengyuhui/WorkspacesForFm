@@ -86,16 +86,22 @@
 
 <!-- 分类加载-->
 
+<view id = "st">
+
 <scroll-view class="typescroll" style="height:530rpx" scroll-y="true" bindscroll="typescrll">
+
   <view wx:for="{{subtypesList}}" class="types" id="types" wx:for-item="father" >
-      <view wx:for="{{father}}" class="types" id="types" >
+      <view wx:for="{{father}}" class="stypes" id="stypes" >
       <view data-id="{{item.subtypesId}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
         <image src="{{item.subtypeIcon}}" />
         <text>{{item.subtypeName}}</text>
       </view>
       </view>
    </view>  
+
   </scroll-view>
+
+  </view>
 
 
 
