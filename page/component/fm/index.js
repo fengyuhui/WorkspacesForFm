@@ -74,8 +74,6 @@ Page({
     onLoad: function () {
         var that = this;
 
-        that.playMusic(1);
-
         app.getUserInfo(function (userInfo) {
           //更新数据  
           that.setData({
@@ -149,7 +147,7 @@ Page({
         //调用API从本地缓存中获取音乐id数据
         if (wx.getStorageSync('music_id') != null) {
           app.globalData.curplay.music_id = wx.getStorageSync('music_id');
-          console.log("读取子分类名称缓存成功" + app.globalData.curplay.music_id);
+          console.log("读取音乐id缓存成功" + app.globalData.curplay.music_id);
           that.setData({
             flag_storage: true
           });
@@ -184,11 +182,11 @@ Page({
 
           //在右上角显示用户选择的分类
           app.globalData.activeSortingIndex=0;
-          app.globalData.activeSortingName=this.data.sortingList[0].value;
-          this.setData({
+          app.globalData.activeSortingName=that.data.sortingList[0].value;
+          that.setData({
             sortingChioceIcon: "/image/music88.png",
             activeSortingIndex:0,
-            activeSortingName:this.data.sortingList[0].value,
+            activeSortingName:that.data.sortingList[0].value,
             pageIndex: 1,
             loadOver: false,
             isLoading: true,
@@ -197,8 +195,9 @@ Page({
         }
         //有音乐缓存则播放之前的音乐
         else{
-          //that.playMusic(app.globalData.curplay.music_id);为了测试暂时删掉这行，要加回来的！
-        }
+          //that.playMusic(app.globalData.curplay.music_id);//为了测试暂时删掉这行，要加回来的！
+          //that.playMusic(1);
+          }
 
         /**
              * 监听音乐自然播完停止
@@ -220,7 +219,11 @@ Page({
 
     playMusic: function (id) {
       var that = this;
-      //无接口测试，要删的！！
+
+
+      that.setPlayStorage();//存缓存
+
+      console.log("music_id"+id);
       that.setData({
         duration: "02:56"
       })
@@ -247,7 +250,8 @@ Page({
               title: app.globalData.curplay.name,
               success: function (res) {
                 app.globalData.globalStop = false;
-                this.setPlayStorage();//存缓存
+                that.data.music.id = id;
+                that.setPlayStorage();//存缓存
                 that.setData({
                   music_title: app.globalData.curplay.name,
                   playing:true,
@@ -261,7 +265,13 @@ Page({
         },
         fail: function(e){
           console.log("获取失败");
-
+          wx.showToast({
+            title: '获取失败',
+            duration: 1000,
+            icon: 'loading',
+            mask: true
+          }
+          );
 
 
           //假设数据test
@@ -415,7 +425,7 @@ Page({
 
         //加载子分类列表
         wx.request({
-          url: app.globalData.homeUrl+'/getSubtypelist?key=' + this.data.sortingList[index].key,
+          url: app.globalData.homeUrl+'/getSubtypelist?key=' + that.data.sortingList[index].key,
           success: function (res) {
             that.setData({
               subtypesList: res.data.subtypesList ,
@@ -428,7 +438,6 @@ Page({
           sortingChioceIcon: "/image/music88.png",
           activeSortingIndex: this.data.sortingList[index].key,
           activeSortingName: this.data.sortingList[index].value,
-          productList: [],
           pageIndex: 1,
           loadOver: false,
           isLoading: true,
@@ -485,8 +494,6 @@ Page({
         }
       },
       fail:function(e){
-        that.playMusic(1);
-
         //无法获取新音频
         wx.showToast({
           title: '获取失败',
@@ -559,7 +566,7 @@ Page({
         key: 'music_id',
         data: app.globalData.curplay.music_id,
         success: function (res) {
-          console.log('异步保存音乐id成功')
+          console.log('异步保存音乐id成功' + app.globalData.curplay.music_id)
         }
       }),
       wx.setStorage({
