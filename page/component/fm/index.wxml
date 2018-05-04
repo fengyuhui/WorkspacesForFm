@@ -108,7 +108,7 @@
 
 
   <!-- 分类小按钮{ -->
-   <!-- <view id="types" class="types">
+    <!-- <view id="types" class="types">
     <view data-id="1" class="energy">
         <image src="../../../image/music92.png" />
         <text>活力早晨</text>
@@ -125,7 +125,7 @@
         <image src="../../../image/fan2.png" />
         <text>活力早晨</text>
     </view>
-  </view> -->
+  </view>  -->
   <!-- 分类小按钮} -->
   
 

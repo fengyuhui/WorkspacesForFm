@@ -443,6 +443,8 @@ Page({
           activeCuritem: index
         })
 
+        app.globalData.activeCuritem = index;
+
         console.log("key" + this.data.activeSortingIndex);
       },
 
