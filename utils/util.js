@@ -98,25 +98,27 @@ function playAlrc(that, app) {
     that.setData({
       music: app.globalData.curplay,
       showlrc: false,
-      // duration: formatduration(app.globalData.curplay.duration)
-      duration:"02:56"
+      duration: formatduration(app.globalData.duration)
     });
     console.log("not match");
     wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
   }
   wx.getBackgroundAudioPlayerState({
     complete: function (res) {
-      var time = 0, playing = false, playtime = 0;
+      var time = 0, playing = false, playtime = 0, duration = 0;
       if (res.status != 2) {
         time = res.currentPosition / res.duration * 100;
         playtime = res.currentPosition;   
+        app.globalData.duration = res.duration;   
+
       } if (res.status == 1) {
         playing = true;
       }
       that.setData({
         playtime: formatduration(playtime * 1000),
         percent: time,
-        playing: playing
+        playing: playing,
+        duration: formatduration(res.duration * 1000)
       })
     }
   });

@@ -74,6 +74,8 @@ Page({
     onLoad: function () {
         var that = this;
 
+        that.playMusic(1);
+
         app.getUserInfo(function (userInfo) {
           //更新数据  
           that.setData({
@@ -224,9 +226,6 @@ Page({
       that.setPlayStorage();//存缓存
 
       console.log("music_id"+id);
-      that.setData({
-        duration: "02:56"
-      })
 
       //清除播放进度
       wx.seekBackgroundAudio({
@@ -256,8 +255,7 @@ Page({
                   music_title: app.globalData.curplay.name,
                   playing:true,
                   duration: common.formatduration(app.globalData.curplay.duration * 1000)
-                })
-                
+                }) 
               }
             });
             wx.setNavigationBarTitle({ title: app.globalData.curplay.name});

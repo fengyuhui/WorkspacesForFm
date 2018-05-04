@@ -173,6 +173,7 @@ App({
     playtype: 1, //播放音频
     curplay: {},
     shuffle: 1,
+    duration: '00:00',
     globalStop: true,
     currentPosition: 0,
     activeSortingIndex: 0,
