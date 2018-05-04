@@ -77,7 +77,7 @@
   <!-- 播放} -->
 
 <view id = "subtypes">
-<view id = "typeleft">
+<view id = "typeleft" bindtap="switchType" data-signal = "-1">
 <image src="../../../image/fm/more_left.png" style = 'width: 15rpx;height:24rpx;'/>
 </view>
 
@@ -125,7 +125,7 @@
 
   </view>
 
-<view id = "typeright">
+<view id = "typeright" bindtap="switchType" data-signal = "1">
 <image src="../../../image/fm/more_right.png" style = 'width: 15rpx;height:24rpx;'/>
 </view>
 

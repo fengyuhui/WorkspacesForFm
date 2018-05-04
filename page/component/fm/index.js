@@ -24,6 +24,7 @@ Page({
         music_title:"美丽的多瑙河",
 
         activeSortingIndex: 0,
+        activeCuritem: 0,
         activeSortingName: "小学一年级",
         activeSubtypeIndex: -1,
         activeSubtypeName:"",
@@ -72,8 +73,6 @@ Page({
         },
     onLoad: function () {
         var that = this;
-        
-        this.playMusic(1);
 
         app.getUserInfo(function (userInfo) {
           //更新数据  
@@ -99,6 +98,16 @@ Page({
           console.log("读取分类id缓存成功" + app.globalData.activeSortingIndex);
           that.setData({
             activeSortingIndex: app.globalData.activeSortingIndex,
+            flag_storage: true
+          });
+        }
+
+        //调用API从本地缓存中获取分类index数据
+        if (wx.getStorageSync('activeCuritem') != null) {
+          app.globalData.activeCuritem = wx.getStorageSync('activeCuritem');
+          console.log("读取分类index缓存成功" + app.globalData.activeCuritem);
+          that.setData({
+            activeCuritem: app.globalData.activeCuritem,
             flag_storage: true
           });
         }
@@ -186,7 +195,7 @@ Page({
         }
         //有音乐缓存则播放之前的音乐
         else{
-          that.playMusic(app.globalData.curplay.music_id);
+          //that.playMusic(app.globalData.curplay.music_id);为了测试暂时删掉这行，要加回来的！
         }
 
         /**
@@ -396,6 +405,8 @@ Page({
   selectSorting: function (e) {
         var index = e.currentTarget.dataset.index;
 
+
+
         //加载子分类列表
         wx.request({
           url: app.globalData.homeUrl+'/getSubtypelist?key=' + this.data.sortingList[index].key,
@@ -415,7 +426,8 @@ Page({
           pageIndex: 1,
           loadOver: false,
           isLoading: true,
-          'currentItem': index
+          'currentItem': index,
+          activeCuritem: index
         })
 
         console.log("key" + this.data.activeSortingIndex);
@@ -542,6 +554,14 @@ Page({
     }),
 
       wx.setStorage({
+        key: 'activeCuritem',
+        data: that.data.activeCuritem,
+        success: function (res) {
+          console.log('异步保存分类index成功')
+        }
+      }),
+
+      wx.setStorage({
         key: 'activeSubtypeIndex',
         data: that.data.activeSubtypeIndex,
           success: function (res) {
@@ -588,5 +608,11 @@ Page({
       }
     }
     
+  },
+
+  //切换分类的小箭头
+  switchType: function(e){
+    var signal = e.currentTarget.dataset.signal;
+    console.log("signal"+signal);
   } 
 })

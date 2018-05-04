@@ -181,6 +181,7 @@ App({
     globalStop: true,
     currentPosition: 0,
     activeSortingIndex: 0,
+    activeCuritem:0,
     activeSortingName: "",
     activeSubtypeIndex: -1,
     activeSubtypeName:""
