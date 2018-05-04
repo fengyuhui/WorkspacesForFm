@@ -612,7 +612,54 @@ Page({
 
   //切换分类的小箭头
   switchType: function(e){
+    var that = this;
     var signal = e.currentTarget.dataset.signal;
     console.log("signal"+signal);
+    var index = 0;
+
+    //取循环index
+    if(signal == 1){
+      if (app.globalData.activeCuritem<that.data.sortingList.length - 1){
+        app.globalData.activeCuritem++;
+        index = app.globalData.activeCuritem;
+      }
+      else{
+        index = 0;
+        app.globalData.activeCuritem = 0;
+      }
+    }
+    if(signal == -1){
+      if(app.globalData.activeCuritem == 0){
+        app.globalData.activeCuritem = that.data.sortingList.length - 1;
+        index = app.globalData.activeCuritem;
+      }
+      else{
+        app.globalData.activeCuritem--;
+        index = app.globalData.activeCuritem;
+      }
+    }
+
+    //加载子分类列表
+    wx.request({
+      url: app.globalData.homeUrl + '/getSubtypelist?key=' + that.data.sortingList[index].key,
+      success: function (res) {
+        that.setData({
+          subtypesList: res.data.subtypesList,
+        });
+      }
+    });
+
+    //显示选择的分类
+    this.setData({
+      sortingChioceIcon: "/image/music88.png",
+      activeSortingIndex: this.data.sortingList[index].key,
+      activeSortingName: this.data.sortingList[index].value,
+      pageIndex: 1,
+      loadOver: false,
+      isLoading: true,
+      'currentItem': index,
+      activeCuritem: index
+    })
+
   } 
 })
