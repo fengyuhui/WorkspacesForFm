@@ -209,12 +209,10 @@ Page({
 
     playMusic: function (id) {
       var that = this;
-
       //无接口测试，要删的！！
       that.setData({
-        duration: common.formatduration(176000)
+        duration: "02:56"
       })
-
       wx.request({
         url: app.globalData.homeUrl +'/getSong?id=' + id,
         header: { 'Content-Type': 'application/json' },
@@ -251,7 +249,7 @@ Page({
 
           //假设数据test
           console.log("获取成功");
-
+          
           wx.playBackgroundAudio({
 
             dataUrl: 'https://t1.aixinxi.net/o_1cciqnctd7tqqa41isru211uc7c.mp3',
