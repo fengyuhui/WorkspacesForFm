@@ -1,16 +1,15 @@
+//var fm = require('../page/component/fm/index.js');
 App({
   onLaunch: function () {
     var that = this;
     //播放列表中下一首
     wx.onBackgroundAudioStop(function () {
       if (that.globalData.globalStop) {
+        
         return;
+        
       }
-      if (that.globalData.playtype == 1) {
-        that.nextplay(1);
-      } else {
-        that.nextfm();
-      }
+      that.nextplay(1);
     });
 
   },
@@ -111,11 +110,7 @@ App({
         cb && cb();
       },
       fail: function () {
-        if (type == 1) {
-          that.nextplay(1)
-        } else {
-          that.nextfm();
-        }
+        that.nextplay(1)
       }
     })
   },
