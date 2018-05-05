@@ -90,7 +90,7 @@
 
 <scroll-view class="typescroll" style="height:530rpx" scroll-y="true" bindscroll="typescrll">
 
-  <view wx:for="{{subtypesList}}" class="types" id="types" wx:for-item="father" >
+  <view wx:for="{{subtypesList_new}}" class="types" id="types" wx:for-item="father" >
       <view wx:for="{{father}}" class="stypes" id="stypes" >
       <view data-id="{{item.subtypesId}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
         <image src="{{item.subtypeIcon}}" />
