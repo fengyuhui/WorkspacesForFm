@@ -277,7 +277,7 @@ Page({
           
           wx.playBackgroundAudio({
 
-            dataUrl: 'https://t1.aixinxi.net/o_1cciqnctd7tqqa41isru211uc7c.mp3',
+            dataUrl: 'http://t1.aixinxi.net/o_1ccn07dld1jfr18fo1akauvp1st0a.mp3',
             title: "啦啦啦",
 
             success: function (res) {
@@ -377,12 +377,21 @@ Page({
           app.globalData.activeSortingIndex = res.data.sorting_id;
           app.globalData.activeSubtypeIndex = res.data.subtype_id;
           app.globalData.activeSortingName = res.data.sorting_name;
+          app.globalData.activeSubtypeName = res.data.subtype_name;
+          var curitem = 0;
+          for (var i = 0; i < that.data.sortingList.length; i++){
+            if (res.data.sorting_id == that.data.sortingList[i].key){
+              curitem = i;
+              app.globalData.activeCuritem = i;
+            }
+          }
 
           that.setData({//把分类和子类都刷新一下
             activeSortingIndex: res.data.sorting_id,
             activeSortingName: res.data.sorting_name,
             activeSubtypeIndex: res.data.subtype_id,
             activeSubtypeName: res.data.subtype_name,
+            activeCuritem: curitem,
             
           });
 
