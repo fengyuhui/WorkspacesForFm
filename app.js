@@ -167,7 +167,7 @@ App({
     homeUrl:"https://w.xueyouyou.vip", 
     //mp3UrlHeader:"https://mp3.xueyouyou.vip/",
     mp3UrlHeader: "https://w.xueyouyou.vip/course/",
-    iconUrlHeader: "https://w.xueyouyou.vip", 
+    iconUrlHeader: "https://w.xueyouyou.vip/icon/", 
     list_am: [],
     list_fm: [],
     list_sf: [],

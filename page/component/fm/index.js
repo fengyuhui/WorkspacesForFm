@@ -378,47 +378,73 @@ Page({
         url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+'&music_id=' + app.globalData.curplay.id+'&signal='+signal,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
-          console.log("other" + res.music_message);
-          app.globalData.curplay.id = res.data.music_message.music_id; 
-          app.globalData.activeSortingIndex = res.data.music_message.sorting_id;
-          app.globalData.activeSubtypeIndex = res.data.music_message.subtype_id;
-          app.globalData.activeSortingName = res.data.music_message.sorting_name;
-          app.globalData.activeSubtypeName = res.data.music_message.subtype_name;
-          var curitem = 0;
-          for (var i = 0; i < that.data.sortingList.length; i++){
-            if (res.data.sorting_id == that.data.sortingList[i].id){
-              curitem = i;
-              app.globalData.activeCuritem = i;
-            }
-          }
-
-          that.setData({//把分类和子类都刷新一下
-            activeSortingIndex: res.data.sorting_id,
-            activeSortingName: res.data.sorting_name,
-            activeSubtypeIndex: res.data.subtype_id,
-            activeSubtypeName: res.data.subtype_name,
-            activeCuritem: curitem,
-          });
-
-          if (app.globalData.activeSortingIndex!=that.data.old_typd){//跳分类了
-            that.setData({
-              old_type: app.globalData.activeSortingIndex
-            })
-            //加载子分类列表
-            wx.request({
-              url: app.globalData.homeUrl + '/getSubtypesList?key=' + that.data.sortingList[app.globalData.activeSortingIndex].id,
-              header: { 'Content-Type': 'application/json' },
-              success: function (res) {
-                that.setData({
-                  subtypesList: res.data.sortingList,
-                });
-                that.turnSubtype();
+          console.log("r"+JSON.stringify(res));
+          if (res.music_message!=null){
+            console.log("other" + res.music_message);
+            app.globalData.curplay.id = res.data.music_message.music_id;
+            app.globalData.activeSortingIndex = res.data.music_message.sorting_id;
+            app.globalData.activeSubtypeIndex = res.data.music_message.subtype_id;
+            app.globalData.activeSortingName = res.data.music_message.sorting_name;
+            app.globalData.activeSubtypeName = res.data.music_message.subtype_name;
+            var curitem = 0;
+            for (var i = 0; i < that.data.sortingList.length; i++) {
+              if (res.data.sorting_id == that.data.sortingList[i].id) {
+                curitem = i;
+                app.globalData.activeCuritem = i;
               }
-            });
-          }
+            }
 
-          //播放新音频
-          that.playMusic(app.globalData.curplay.id);
+            that.setData({//把分类和子类都刷新一下
+              activeSortingIndex: res.data.sorting_id,
+              activeSortingName: res.data.sorting_name,
+              activeSubtypeIndex: res.data.subtype_id,
+              activeSubtypeName: res.data.subtype_name,
+              activeCuritem: curitem,
+            });
+
+            if (app.globalData.activeSortingIndex != that.data.old_typd) {//跳分类了
+              that.setData({
+                old_type: app.globalData.activeSortingIndex
+              })
+              //加载子分类列表
+              wx.request({
+                url: app.globalData.homeUrl + '/getSubtypesList?key=' + that.data.sortingList[app.globalData.activeSortingIndex].id,
+                header: { 'Content-Type': 'application/json' },
+                success: function (res) {
+                  that.setData({
+                    subtypesList: res.data.sortingList,
+                  });
+                  that.turnSubtype();
+                }
+              });
+            }
+
+            //播放新音频
+            that.playMusic(app.globalData.curplay.id);
+          }
+          else{
+            // //播放原音频
+            // //that.playMusic(app.globalData.curplay.id);
+
+
+            // app.stopmusic(1);
+            // //停止音频
+
+            // //清除播放进度
+            // wx.seekBackgroundAudio({
+            //   position: 0
+            // })
+            // that.setData({
+            //   imgload: true,
+            //   playtime: common.formatduration(0),
+            //   duration: common.formatduration(0),
+            //   percent: .1,
+            //   music: {},
+            //   commentscount: 0,
+            //   playing: false,
+            //   showlrc: false
+            // }) //音频数据清空
+          }
         },
         fail: function(e){
           //无法获取新音频
@@ -779,7 +805,8 @@ Page({
           arry[j] = that.data.subtypesList[index];
 
           //处理图标链接
-          arry[j].iconLocation = "http://t1.aixinxi.net/"+"o_1ccq84h2717ha2p81hgv1uflhva.png-j.jpg";
+         //arry[j].iconLocation = "http://t1.aixinxi.net/"+"o_1ccq84h2717ha2p81hgv1uflhva.png-j.jpg";
+          arry[j].iconLocation = app.globalData.iconUrlHeader+that.data.subtypesList[index].iconLocation;
           index++;
           console.log(index);
         }

@@ -98,7 +98,7 @@ function playAlrc(that, app) {
     that.setData({
       music: app.globalData.curplay,
       showlrc: false,
-      duration: formatduration(app.globalData.duration)
+      duration: "00:00"
     });
     console.log("not match");
     wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
