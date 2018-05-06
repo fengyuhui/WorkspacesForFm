@@ -48,7 +48,7 @@ Page({
         //   activeSubtypeIndex: 0}],
        
         
-        sortingList: [], 
+      sortingList: [], 
 
       subtypesList_new:{},
 
@@ -225,7 +225,10 @@ Page({
         url: app.globalData.homeUrl +'/getSong?id=' + id,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
+          console.log("songs" + res.data);
           app.globalData.curplay = res.data.songs;
+          console.log("songs" + app.globalData.curplay.id);
+          console.log("mp3链接" + app.globalData.curplay.location);
           if (!res.data.songs.location) {
             console.log("mp3链接不存在");
             that.setData({
@@ -234,7 +237,7 @@ Page({
           } else {
             console.log("获取成功");
             wx.playBackgroundAudio({
-              dataUrl: mp3UrlHeader+app.globalData.curplay.location,
+              dataUrl: app.globalData.mp3UrlHeader+app.globalData.curplay.location,
               title: app.globalData.curplay.courseName,
               success: function (res) {
                 app.globalData.globalStop = false;
@@ -473,12 +476,18 @@ Page({
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         app.globalData.curplay = res.data.songs;
+        console.log("songs" + res.data.songs.id);
+        console.log("mm" + res.data.songs.location);
         if (!res.data.songs.location) {
           console.log("mp3链接不存在");
+          console.log("mm" + res.data.songs.location);
           that.setData({
             disable: true
           })
         } else {
+
+          console.log("name" + res.data.songs.courseName);
+
           //缓存
           that.setPlayStorage();
           //清除播放进度
@@ -498,13 +507,18 @@ Page({
           }) //音频数据清空
 
           wx.playBackgroundAudio({
-            dataUrl: mp3UrlHeader+res.data.songs.location,
+            dataUrl: app.globalData.mp3UrlHeader+res.data.songs.location,
             title: res.data.songs.courseName,
             success: function (res) {
               app.globalData.globalStop = false;
+              console.log("here");
+              
               that.setData({
                 playing: true
               })
+            },
+            fail: function(res){
+              console.log("fail"+res);
             }
           });
           wx.setNavigationBarTitle({
