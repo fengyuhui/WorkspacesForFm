@@ -48,27 +48,27 @@ Page({
        
         
         sortingList: [{ 
-          key: 1, value: "小学一年级"
+          id: 1, typeName: "小学一年级"
         }, {
-          key: 2, value: "小学二年级"
+          id: 2, typeName: "小学二年级"
         }, {
-          key: 3, value: "小学三年级"
+          id: 3, typeName: "小学三年级"
         }, {
-          key: 4, value: "小学四年级"
+          id: 4, typeName: "小学四年级"
         }, {
-          key: 5, value: "小学五年级"
+          id: 5, typeName: "小学五年级"
         }, {
-          key: 6, value: "小学六年级"
+          id: 6, typeName: "小学六年级"
         }], 
 
       subtypesList_new:{},
 
       subtypesList:[
-        { subtypesId: '1', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '2', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '3', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '4', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { subtypesId: '5', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '6', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '7', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '8', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { subtypesId: '9', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '10', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '11', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '12', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { subtypesId: '13', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '14', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '15', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { subtypesId: '13', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '14', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '15', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { subtypesId: '16', subtypeName: '活力早餐', subtypeIcon: '/image/music88.png' }
+        { id: '1', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '2', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '3', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '4', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
+        { id: '5', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '6', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '7', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '8', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
+        { id: '9', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '10', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '11', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '12', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
+        { id: '13', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '14', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '15', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
+        { id: '13', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '14', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '15', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }
       ]
         },
     onLoad: function () {
@@ -150,8 +150,8 @@ Page({
 
         //调用API从本地缓存中获取音乐id数据
         if (wx.getStorageSync('music_id') != null) {
-          app.globalData.curplay.music_id = wx.getStorageSync('music_id');
-          console.log("读取音乐id缓存成功" + app.globalData.curplay.music_id);
+          app.globalData.curplay.id = wx.getStorageSync('music_id');
+          console.log("读取音乐id缓存成功" + app.globalData.curplay.id);
           that.setData({
             flag_storage: true
           });
@@ -161,7 +161,7 @@ Page({
         // if (playStorage!=[]){
         //   this.setData({
         //     activeSortingIndex: that.data.index,
-        //     activeSortingName: that.data.sortingList[index].value,
+        //     activeSortingName: that.data.sortingList[index].typeName,
         //     music_id: that.globalData.curplay.id,
         //     activeSubtypeIndex: that.data.activeSubtypeIndex
         //   })
@@ -179,7 +179,7 @@ Page({
             url: app.globalData.homeUrl +'/getSubtypelist?key=0',
             success: function (res) {
               that.setData({
-                subtypesList: res.data.subtypesList,
+                subtypesList: res.data.sortingList,
               });
               that.turnSubtype();
             }
@@ -187,11 +187,11 @@ Page({
 
           //在右上角显示用户选择的分类
           app.globalData.activeSortingIndex=0;
-          app.globalData.activeSortingName=that.data.sortingList[0].value;
+          app.globalData.activeSortingName=that.data.sortingList[0].typeName;
           that.setData({
             sortingChioceIcon: "/image/music88.png",
             activeSortingIndex:0,
-            activeSortingName:that.data.sortingList[0].value,
+            activeSortingName:that.data.sortingList[0].typeName,
             pageIndex: 1,
             loadOver: false,
             isLoading: true,
@@ -200,7 +200,7 @@ Page({
         }
         //有音乐缓存则播放之前的音乐
         else{
-          //that.playMusic(app.globalData.curplay.music_id);//为了测试暂时删掉这行，要加回来的！
+          that.playMusic(app.globalData.curplay.id);//为了测试暂时删掉这行，要加回来的！
           //that.playMusic(1);
           }
 
@@ -240,7 +240,7 @@ Page({
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
           app.globalData.curplay = res.data.songs[0];
-          if (!res.data.songs[0].mp3Url) {
+          if (!res.data.songs[0].location) {
             console.log("mp3链接不存在");
             that.setData({
               disable: true
@@ -248,20 +248,20 @@ Page({
           } else {
             console.log("获取成功");
             wx.playBackgroundAudio({
-              dataUrl: app.globalData.curplay.mp3Url,
-              title: app.globalData.curplay.name,
+              dataUrl: mp3UrlHeader+app.globalData.curplay.location,
+              title: app.globalData.curplay.courseName,
               success: function (res) {
                 app.globalData.globalStop = false;
-                that.data.music.id = id;
+                
                 that.setPlayStorage();//存缓存
                 that.setData({
-                  music_title: app.globalData.curplay.name,
+                  music_title: app.globalData.curplay.courseName,
                   playing:true,
-                  duration: common.formatduration(app.globalData.curplay.duration * 1000)
+                  music: app.globalData.curplay
                 }) 
               }
             });
-            wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
+            wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
           }
         },
         fail: function(e){
@@ -281,13 +281,13 @@ Page({
           wx.playBackgroundAudio({
 
             dataUrl: 'http://t1.aixinxi.net/o_1ccn07dld1jfr18fo1akauvp1st0a.mp3',
-            title: "啦啦啦",
+            title: "获取失败",
 
             success: function (res) {
               app.globalData.globalStop = false;
               that.setPlayStorage();//存缓存
               that.setData({
-                music_title: "啦啦啦",
+                music_title: "获取失败",
                 playing: true
               })
 
@@ -295,7 +295,7 @@ Page({
             }
           });
           wx.setNavigationBarTitle({
-            title: "啦啦啦"
+            title: app.globalData.curplay.courseName
           });
         }
       });
@@ -309,7 +309,7 @@ Page({
         seek = setInterval(function () {
             common.playAlrc(that, app)
         }, 1000);
-      //  wx.setNavigationBarTitle({ title: app.globalData.curplay.name + "-" + app.globalData.curplay.artists[0].name || "" });
+      //  wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName + "-" + app.globalData.curplay.artists[0].name || "" });
     },
     onHide: function () {
         clearInterval(seek);
@@ -374,16 +374,16 @@ Page({
      
       //加载下一播放音频id
       wx.request({
-        url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+ +'&music_id=' + app.globalData.curplay.music_id+'&signal='+signal,
+        url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+ +'&music_id=' + app.globalData.curplay.id+'&signal='+signal,
         success: function (res) {
-          app.globalData.curplay.music_id = res.data.music_id; 
-          app.globalData.activeSortingIndex = res.data.sorting_id;
-          app.globalData.activeSubtypeIndex = res.data.subtype_id;
-          app.globalData.activeSortingName = res.data.sorting_name;
-          app.globalData.activeSubtypeName = res.data.subtype_name;
+          app.globalData.curplay.id = res.data.music_message.music_id; 
+          app.globalData.activeSortingIndex = res.data.music_message.sorting_id;
+          app.globalData.activeSubtypeIndex = res.data.music_message.subtype_id;
+          app.globalData.activeSortingName = res.data.music_message.sorting_name;
+          app.globalData.activeSubtypeName = res.data.music_message.subtype_name;
           var curitem = 0;
           for (var i = 0; i < that.data.sortingList.length; i++){
-            if (res.data.sorting_id == that.data.sortingList[i].key){
+            if (res.data.sorting_id == that.data.sortingList[i].id){
               curitem = i;
               app.globalData.activeCuritem = i;
             }
@@ -399,7 +399,7 @@ Page({
           });
 
           //播放新音频
-          that.playMusic(app.globalData.curplay.music_id);
+          that.playMusic(app.globalData.curplay.id);
         },
         fail: function(e){
           //无法获取新音频
@@ -435,10 +435,10 @@ Page({
 
         //加载子分类列表
         wx.request({
-          url: app.globalData.homeUrl+'/getSubtypelist?key=' + that.data.sortingList[index].key,
+          url: app.globalData.homeUrl+'/getSubtypelist?key=' + that.data.sortingList[index].id,
           success: function (res) {
             that.setData({
-              subtypesList: res.data.subtypesList ,
+              subtypesList: res.data.sortingList ,
             });
             that.turnSubtype();
           }
@@ -447,8 +447,8 @@ Page({
         //显示选择的分类
         that.setData({
           sortingChioceIcon: "/image/music88.png",
-          activeSortingIndex: this.data.sortingList[index].key,
-          activeSortingName: this.data.sortingList[index].value,
+          activeSortingIndex: this.data.sortingList[index].id,
+          activeSortingName: this.data.sortingList[index].typeName,
           pageIndex: 1,
           loadOver: false,
           isLoading: true,
@@ -458,7 +458,7 @@ Page({
 
         app.globalData.activeCuritem = index;
 
-        console.log("key" + this.data.activeSortingIndex);
+        console.log("id" + this.data.activeSortingIndex);
       },
 
 
@@ -469,31 +469,31 @@ Page({
     //显示选择的子分类
     this.setData({
       sortingChioceIcon: "/image/music88.png",
-      activeSubtypeIndex: obj.subtypesId,
-      activeSubtypeName: obj.subtypeName,
+      activeSubtypeIndex: obj.id,
+      activeSubtypeName: obj.typeName,
       pageIndex: 1,
       loadOver: false,
       isLoading: true,
     })
-    console.log("subtypeName" + obj.subtypeName);
+    console.log("subtypeName" + obj.typeName);
 
     //根据子分类来获取音频：
 
     var that = this;
     wx.request({
-      url: app.globalData.homeUrl + '/getFirstSong?id=' + obj.subtypesId,
+      url: app.globalData.homeUrl + '/getFirstSong?id=' + obj.id,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         app.globalData.curplay = res.data.songs[0];
-        if (!res.data.songs[0].mp3Url) {
+        if (!res.data.songs[0].location) {
           console.log("mp3链接不存在");
           that.setData({
             disable: true
           })
         } else {
           wx.playBackgroundAudio({
-            dataUrl: res.data.songs[0].mp3Url,
-            title: res.data.songs[0].name,
+            dataUrl: mp3UrlHeader+res.data.songs[0].location,
+            title: res.data.songs[0].courseName,
             success: function (res) {
               app.globalData.globalStop = false;
               that.setData({
@@ -502,7 +502,7 @@ Page({
             }
           });
           wx.setNavigationBarTitle({
-            title: app.globalData.curplay.name
+            title: app.globalData.curplay.courseName
           });
         }
       },
@@ -584,9 +584,9 @@ Page({
     }),
       wx.setStorage({
         key: 'music_id',
-        data: app.globalData.curplay.music_id,
+        data: app.globalData.curplay.id,
         success: function (res) {
-          console.log('异步保存音乐id成功' + app.globalData.curplay.music_id)
+          console.log('异步保存音乐id成功' + app.globalData.curplay.id)
         }
       }),
       wx.setStorage({
@@ -624,7 +624,7 @@ Page({
       // var playData = that.data.playStorage;
     // playData.push({
     //   activeSortingIndex: that.data.index,
-    //   activeSortingName: that.data.sortingList[index].value,
+    //   activeSortingName: that.data.sortingList[index].typeName,
     //   music_id: that.data.music_id,
     //   activeSubtypeIndex: that.data.activeSubtypeIndex
     // })
@@ -685,10 +685,10 @@ Page({
 
     //加载子分类列表
     wx.request({
-      url: app.globalData.homeUrl + '/getSubtypelist?key=' + that.data.sortingList[index].key,
+      url: app.globalData.homeUrl + '/getSubtypelist?key=' + that.data.sortingList[index].id,
       success: function (res) {
         that.setData({
-          subtypesList: res.data.subtypesList,
+          subtypesList: res.data.sortingList,
         });
         that.turnSubtype();
       }
@@ -697,8 +697,8 @@ Page({
     //显示选择的分类
     this.setData({
       sortingChioceIcon: "/image/music88.png",
-      activeSortingIndex: this.data.sortingList[index].key,
-      activeSortingName: this.data.sortingList[index].value,
+      activeSortingIndex: this.data.sortingList[index].id,
+      activeSortingName: this.data.sortingList[index].typeName,
       pageIndex: 1,
       loadOver: false,
       isLoading: true,
@@ -708,7 +708,7 @@ Page({
 
   },
 
-  turnSubtype:function(){
+  turnSubtype:function(){//处理子分类使之适配界面
     var that = this;
     //处理子分类数据：
     var json = {};
