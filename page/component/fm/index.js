@@ -525,6 +525,13 @@ Page({
         chioceSorting:false
       })
     },
+
+  cancel_type: function (e) {
+    chioceSorting: false,
+      this.setData({
+        chioceSorting: false
+      })
+  },
       
   scrll: function (e) {
     var scrollTop = e.detail.scrollTop

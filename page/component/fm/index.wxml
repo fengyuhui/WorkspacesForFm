@@ -22,7 +22,7 @@
   <!-- 列表选项{ -->
   <view class="sorting-list{{!chioceSorting?' chioce-list-hide':' chioce-list-show'}}"> 
     <view class="sorting-item">
-    <text id = "cancel">取消</text>
+    <text id = "cancel" bindtap='cancel_type'>取消</text>
     <text id = "ok" bindtap='ensure_type'>确定</text>
     </view>
     <scroll-view class="scroll" scroll-top = "520rpx" style="height:320rpx;" scroll-y="true" bindscroll="scrll"  bindscrolltolower="loadMore"> 
