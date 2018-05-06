@@ -93,7 +93,7 @@ function playAlrc(that, app) {
     });
     return;
   }
-  if (that.data.music.id != app.globalData.curplay.music_id) {
+  if (that.data.music.id != app.globalData.curplay.id) {
     app.globalData.currentPosition=0;
     that.setData({
       music: app.globalData.curplay,
@@ -101,7 +101,7 @@ function playAlrc(that, app) {
       duration: formatduration(app.globalData.duration)
     });
     console.log("not match");
-    wx.setNavigationBarTitle({ title: app.globalData.curplay.name});
+    wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
   }
   wx.getBackgroundAudioPlayerState({
     complete: function (res) {
