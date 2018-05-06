@@ -241,8 +241,8 @@ Page({
         url: app.globalData.homeUrl +'/getSong?id=' + id,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
-          app.globalData.curplay = res.data.songs[0];
-          if (!res.data.songs[0].location) {
+          app.globalData.curplay = res.data.songs;
+          if (!res.data.songs.location) {
             console.log("mp3链接不存在");
             that.setData({
               disable: true
@@ -488,16 +488,16 @@ Page({
       url: app.globalData.homeUrl + '/getFirstSong?id=' + obj.id,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
-        app.globalData.curplay = res.data.songs[0];
-        if (!res.data.songs[0].location) {
+        app.globalData.curplay = res.data.songs;
+        if (!res.data.songs.location) {
           console.log("mp3链接不存在");
           that.setData({
             disable: true
           })
         } else {
           wx.playBackgroundAudio({
-            dataUrl: mp3UrlHeader+res.data.songs[0].location,
-            title: res.data.songs[0].courseName,
+            dataUrl: mp3UrlHeader+res.data.songs.location,
+            title: res.data.songs.courseName,
             success: function (res) {
               app.globalData.globalStop = false;
               that.setData({
