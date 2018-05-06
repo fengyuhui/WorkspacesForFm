@@ -93,7 +93,7 @@
   <view wx:for="{{subtypesList_new}}" class="types" id="types" wx:for-item="father" >
       <view wx:for="{{father}}" class="stypes" id="stypes" >
       <view data-id="{{item.id}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
-        <image src="{{item.subtypeIcon}}" />
+         <image src="{{item.iconLocation}}" /> 
         <text>{{item.typeName}}</text>
       </view>
       </view>

@@ -64,11 +64,11 @@ Page({
       subtypesList_new:{},
 
       subtypesList:[
-        { id: '1', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '2', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '3', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '4', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { id: '5', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '6', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '7', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '8', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { id: '9', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '10', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '11', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '12', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { id: '13', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '14', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '15', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' },
-        { id: '13', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '14', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '15', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }, { id: '16', typeName: '活力早餐', subtypeIcon: '/image/music88.png' }
+        { id: '1', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '2', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '3', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '4', typeName: '活力早餐', iconLocation: '/image/music88.png' },
+        { id: '5', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '6', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '7', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '8', typeName: '活力早餐', iconLocation: '/image/music88.png' },
+        { id: '9', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '10', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '11', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '12', typeName: '活力早餐', iconLocation: '/image/music88.png' },
+        { id: '13', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '14', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '15', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' },
+        { id: '13', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '14', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '15', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }
       ]
         },
     onLoad: function () {
@@ -731,7 +731,7 @@ Page({
 
   },
 
-  turnSubtype:function(){//处理子分类使之适配界面
+  turnSubtype:function(){//处理子分类使之适配界面和图标链接
     var that = this;
     //处理子分类数据：
     var json = {};
@@ -742,12 +742,19 @@ Page({
       row++;
     }
     console.log("row" + row);
+    console.log(old_length);
     var index = 0;
-    for (var i = 1; i < row + 1, index < old_length; i++) {
+    for (var i = 1; i<row,index < old_length; i++) {
       var arry = [];
       for (var j = 0; j < 4; j++ ) {
-        arry[j] = that.data.subtypesList[index];
-        index++;
+        if (that.data.subtypesList[index]){
+          arry[j] = that.data.subtypesList[index];
+
+          //处理图标链接
+          arry[j].iconLocation = "http://t1.aixinxi.net/"+"o_1ccq84h2717ha2p81hgv1uflhva.png-j.jpg";
+          index++;
+          console.log(index);
+        }
       }
       json[i - 1] = arry;
     }

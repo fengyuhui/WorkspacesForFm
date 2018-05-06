@@ -166,6 +166,7 @@ App({
     hasLogin: false,
     homeUrl:"https://w.xueyouyou.vip", 
     mp3UrlHeader:"https://mp3.xueyouyou.vip/",
+    iconUrlHeader: "https://w.xueyouyou.vip", 
     list_am: [],
     list_fm: [],
     list_sf: [],
