@@ -495,6 +495,24 @@ Page({
             disable: true
           })
         } else {
+          //缓存
+          that.setPlayStorage();
+          //清除播放进度
+          wx.seekBackgroundAudio({
+            position: 0
+          })
+
+          that.setData({
+            imgload: true,
+            playtime: common.formatduration(0),
+            duration: common.formatduration(0),
+            percent: .1,
+            music: {},
+            commentscount: 0,
+            playing: false,
+            showlrc: false
+          }) //音频数据清空
+
           wx.playBackgroundAudio({
             dataUrl: mp3UrlHeader+res.data.songs.location,
             title: res.data.songs.courseName,
