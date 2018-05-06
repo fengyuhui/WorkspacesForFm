@@ -164,7 +164,8 @@ App({
   globalData: {
     userInfo: null,
     hasLogin: false,
-    homeUrl:"https://abc.com", 
+    homeUrl:"https://w.xueyouyou.vip", 
+    mp3UrlHeader:"https://mp3.xueyouyou.vip/",
     list_am: [],
     list_fm: [],
     list_sf: [],

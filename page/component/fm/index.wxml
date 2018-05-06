@@ -28,7 +28,7 @@
     <scroll-view class="scroll" scroll-top = "520rpx" style="height:320rpx;" scroll-y="true" bindscroll="scrll"  bindscrolltolower="loadMore"> 
       <view wx:for="{{sortingList}}" data-index="{{index}}"  class="sorting-item{{currentItem==index?'active-tag':''}}" catchtap="selectSorting">
       <view class="backgroundview{{currentItem==index?'active-tag':''}}">
-      <text decode="emsp">&emsp;{{item.value}}&emsp;</text>
+      <text decode="emsp">&emsp;{{item.typeName}}&emsp;</text>
       </view>
       </view>
       </scroll-view>
@@ -92,9 +92,9 @@
 
   <view wx:for="{{subtypesList_new}}" class="types" id="types" wx:for-item="father" >
       <view wx:for="{{father}}" class="stypes" id="stypes" >
-      <view data-id="{{item.subtypesId}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
+      <view data-id="{{item.id}}" class="energy" data-index="{{index}}" data-obj="{{father[index]}}" bindtap="choiceSub">
         <image src="{{item.subtypeIcon}}" />
-        <text>{{item.subtypeName}}</text>
+        <text>{{item.typeName}}</text>
       </view>
       </view>
    </view>  
