@@ -88,6 +88,7 @@ Page({
         //加载类别列表
         wx.request({
           url: app.globalData.homeUrl+'/getSortinglists',
+          header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
               //sortingList: res.data.sortingList,
@@ -177,6 +178,7 @@ Page({
           //加载子分类列表
           wx.request({
             url: app.globalData.homeUrl +'/getSubtypelist?key=0',
+            header: { 'Content-Type': 'application/json' },
             success: function (res) {
               that.setData({
                 subtypesList: res.data.sortingList,
@@ -282,7 +284,7 @@ Page({
 
             dataUrl: 'http://t1.aixinxi.net/o_1ccn07dld1jfr18fo1akauvp1st0a.mp3',
             title: "获取失败",
-
+            header: { 'Content-Type': 'application/json' },
             success: function (res) {
               app.globalData.globalStop = false;
               that.setPlayStorage();//存缓存
@@ -375,6 +377,7 @@ Page({
       //加载下一播放音频id
       wx.request({
         url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+ +'&music_id=' + app.globalData.curplay.id+'&signal='+signal,
+        header: { 'Content-Type': 'application/json' },
         success: function (res) {
           app.globalData.curplay.id = res.data.music_message.music_id; 
           app.globalData.activeSortingIndex = res.data.music_message.sorting_id;
@@ -436,6 +439,7 @@ Page({
         //加载子分类列表
         wx.request({
           url: app.globalData.homeUrl+'/getSubtypelist?key=' + that.data.sortingList[index].id,
+          header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
               subtypesList: res.data.sortingList ,
@@ -686,6 +690,7 @@ Page({
     //加载子分类列表
     wx.request({
       url: app.globalData.homeUrl + '/getSubtypelist?key=' + that.data.sortingList[index].id,
+      header: { 'Content-Type': 'application/json' },
       success: function (res) {
         that.setData({
           subtypesList: res.data.sortingList,
