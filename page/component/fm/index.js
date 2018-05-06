@@ -21,11 +21,11 @@ Page({
         commentscount: 0,
         sortingChioceIcon: "/image/music88.png",
 
-        music_title:"美丽的多瑙河",
+        music_title:"",
 
         activeSortingIndex: 0,
         activeCuritem: 0,
-        activeSortingName: "小学一年级",
+        activeSortingName: "",
         activeSubtypeIndex: -1,
         activeSubtypeName:"",
 
@@ -38,6 +38,7 @@ Page({
 
         //判断是否有缓存
         flag_storage:false,
+        flag_music:false,
 
 
         chioceSorting: false,
@@ -47,29 +48,11 @@ Page({
         //   activeSubtypeIndex: 0}],
        
         
-        sortingList: [{ 
-          id: 1, typeName: "小学一年级"
-        }, {
-          id: 2, typeName: "小学二年级"
-        }, {
-          id: 3, typeName: "小学三年级"
-        }, {
-          id: 4, typeName: "小学四年级"
-        }, {
-          id: 5, typeName: "小学五年级"
-        }, {
-          id: 6, typeName: "小学六年级"
-        }], 
+        sortingList: [], 
 
       subtypesList_new:{},
 
-      subtypesList:[
-        { id: '1', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '2', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '3', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '4', typeName: '活力早餐', iconLocation: '/image/music88.png' },
-        { id: '5', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '6', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '7', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '8', typeName: '活力早餐', iconLocation: '/image/music88.png' },
-        { id: '9', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '10', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '11', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '12', typeName: '活力早餐', iconLocation: '/image/music88.png' },
-        { id: '13', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '14', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '15', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' },
-        { id: '13', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '14', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '15', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }, { id: '16', typeName: '活力早餐', iconLocation: '/image/music88.png' }
-      ]
+      subtypesList:{}
         },
     onLoad: function () {
         var that = this;
@@ -154,7 +137,8 @@ Page({
           app.globalData.curplay.id = wx.getStorageSync('music_id');
           console.log("读取音乐id缓存成功" + app.globalData.curplay.id);
           that.setData({
-            flag_storage: true
+            flag_storage: true,
+            flag_music:true
           });
         };
 
@@ -177,7 +161,7 @@ Page({
 
           //加载子分类列表
           wx.request({
-            url: app.globalData.homeUrl +'/getSubtypelist?key=0',
+            url: app.globalData.homeUrl +'/getSubtypesList?key=0',
             header: { 'Content-Type': 'application/json' },
             success: function (res) {
               that.setData({
@@ -201,7 +185,7 @@ Page({
           })
         }
         //有音乐缓存则播放之前的音乐
-        else{
+        else if(that.data.flag_music){
           that.playMusic(app.globalData.curplay.id);//为了测试暂时删掉这行，要加回来的！
           //that.playMusic(1);
           }
@@ -438,7 +422,7 @@ Page({
 
         //加载子分类列表
         wx.request({
-          url: app.globalData.homeUrl+'/getSubtypelist?key=' + that.data.sortingList[index].id,
+          url: app.globalData.homeUrl+'/getSubtypesList?key=' + that.data.sortingList[index].id,
           header: { 'Content-Type': 'application/json' },
           success: function (res) {
             that.setData({
@@ -707,7 +691,7 @@ Page({
 
     //加载子分类列表
     wx.request({
-      url: app.globalData.homeUrl + '/getSubtypelist?key=' + that.data.sortingList[index].id,
+      url: app.globalData.homeUrl + '/getSubtypesLists?key=' + that.data.sortingList[index].id,
       header: { 'Content-Type': 'application/json' },
       success: function (res) {
         that.setData({
