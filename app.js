@@ -9,7 +9,7 @@ App({
         return;
         
       }
-      that.nextplay(1);
+      //that.nextplay(1);
     });
 
   },
