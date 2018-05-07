@@ -222,13 +222,29 @@ Page({
           //that.playMusic(1);
           }
 
+
+        wx.onBackgroundAudioStop(function () {
+          console.log('onBackgroundAudioStop');
+          app.globalData.duration = "00:00";
+          that.setData({
+            duration:"00:00"
+          });
+
+          that.playother(1);
+        })
+
         /**
              * 监听音乐自然播完停止
              */
-        wx.onBackgroundAudioStop(function () {
-          console.log('onBackgroundAudioStop');
-          that.playother(1);
-        })
+        wx.backgroundAudioManager().onEnded(function(){
+          console.log('onBackgroundAudioEnded');
+          app.globalData.duration = "00:00";
+          that.setData({
+            duration: "00:00"
+          })
+        });
+        
+
         
     },
     getUserInfo: function (e) {
@@ -361,6 +377,7 @@ Page({
     playother: function (e) { //signal为1时下一首，为-1时上一首
       var that = this;
       that.setPlayStorage();//存缓存
+      console.log(e);
 
       wx.getBackgroundAudioPlayerState({
         complete: function (res) {
@@ -392,7 +409,7 @@ Page({
         url: app.globalData.homeUrl + '/getOtherSong?id='+app.globalData.activeSubtypeIndex+'&music_id=' + app.globalData.curplay.id+'&signal='+signal,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
-          console.log("r"+JSON.stringify(res));
+          console.log(JSON.stringify(res));
           if (res.data.music_message!=null){
             console.log("other" + res.data.music_message);
             app.globalData.curplay.id = res.data.music_message.music_id;

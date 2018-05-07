@@ -113,6 +113,12 @@ function playAlrc(that, app) {
       } if (res.status == 1) {
         playing = true;
       }
+      if (res.status == 0){
+        app.globalData.duration = "00:00";
+        that.setData({
+          duration:"00:00"
+        })
+      }
       that.setData({
         playtime: formatduration(playtime * 1000),
         percent: time,
