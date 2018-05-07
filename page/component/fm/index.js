@@ -24,8 +24,8 @@ Page({
 
         music_title:"",
 
-        activeSortingIndex: 0,
-        activeCuritem: 0,
+        activeSortingIndex: -1,
+        activeCuritem: -1,
         activeSortingName: "",
         activeSubtypeIndex: -1,
         activeSubtypeName:"",
@@ -82,78 +82,95 @@ Page({
         });
         
         //调用API从本地缓存中获取分类id数据
-        if (wx.getStorageSync('activeSortingIndex') != null) {
-          app.globalData.activeSortingIndex = wx.getStorageSync('activeSortingIndex');
-          console.log("读取分类id缓存成功" + app.globalData.activeSortingIndex);
-          that.setData({
-            activeSortingIndex: app.globalData.activeSortingIndex,
-            old_type: app.globalData.activeSortingIndex,
-            flag_storage: true
-          });
+        if (wx.getStorageSync('activeSortingIndex')!=null) {
+          app.globalData.activeSortingIndex = wx.getStorageSync('activeSortingIndex') || -1;
+          if (app.globalData.activeSortingIndex!=-1){
+            console.log("读取分类id缓存成功" + app.globalData.activeSortingIndex);
+            that.setData({
+              activeSortingIndex: app.globalData.activeSortingIndex,
+              old_type: app.globalData.activeSortingIndex,
+              flag_storage: true
+            });
 
-          //加载子分类列表
-          wx.request({
-            url: app.globalData.homeUrl + '/getSubtypesList?key=' + app.globalData.activeSortingIndex,
-            header: { 'Content-Type': 'application/json' },
-            success: function (res) {
-              that.setData({
-                subtypesList: res.data.sortingList,
-              });
-              that.turnSubtype();
-            }
-          });          
+            //加载子分类列表
+            wx.request({
+              url: app.globalData.homeUrl + '/getSubtypesList?key=' + app.globalData.activeSortingIndex,
+              header: { 'Content-Type': 'application/json' },
+              success: function (res) {
+                that.setData({
+                  subtypesList: res.data.sortingList,
+                });
+                that.turnSubtype();
+              }
+            });    
+          }       
         }
 
         //调用API从本地缓存中获取分类index数据
         if (wx.getStorageSync('activeCuritem') != null) {
-          app.globalData.activeCuritem = wx.getStorageSync('activeCuritem');
-          console.log("读取分类index缓存成功" + app.globalData.activeCuritem);
-          that.setData({
-            activeCuritem: app.globalData.activeCuritem,
-            flag_storage: true
-          });
+          app.globalData.activeCuritem = wx.getStorageSync('activeCuritem') || -1;
+          if (app.globalData.activeCuritem!=-1){
+            console.log("读取分类index缓存成功" + app.globalData.activeCuritem);
+            that.setData({
+              activeCuritem: app.globalData.activeCuritem,
+              flag_storage: true
+            });
+          }
+          
         }
 
         //调用API从本地缓存中获取分类名称数据
         if (wx.getStorageSync('activeSortingName')!=null){
-          app.globalData.activeSortingName = wx.getStorageSync('activeSortingName');
-          console.log("读取分类名称缓存成功" + app.globalData.activeSortingName);
-          that.setData({
-            activeSortingName: wx.getStorageSync('activeSortingName'),
-            flag_storage: true
-          });
+          app.globalData.activeSortingName = wx.getStorageSync('activeSortingName') || "";
+          if (app.globalData.activeSortingName!=""){
+            console.log("读取分类名称缓存成功" + app.globalData.activeSortingName);
+            that.setData({
+              activeSortingName: wx.getStorageSync('activeSortingName'),
+              flag_storage: true
+            });
+          }
+          
         }
 
         //调用API从本地缓存中获取子分类id数据
         if (wx.getStorageSync('activeSubtypeIndex')!=null){
-          app.globalData.activeSubtypeIndex = wx.getStorageSync('activeSubtypeIndex');
-          console.log("读取子分类id缓存成功" + app.globalData.activeSubtypeIndex);
-          that.setData({
-            flag_storage: true,
-            activeSubtypeIndex: app.globalData.activeSubtypeIndex
-          });
+          app.globalData.activeSubtypeIndex = wx.getStorageSync('activeSubtypeIndex') || -1;
+          if (app.globalData.activeSubtypeIndex!=-1){
+            console.log("读取子分类id缓存成功" + app.globalData.activeSubtypeIndex);
+            that.setData({
+              flag_storage: true,
+              activeSubtypeIndex: app.globalData.activeSubtypeIndex
+            });
+          }
+          
         }
         
 
         //调用API从本地缓存中获取子分类名称数据
         if (wx.getStorageSync('activeSubtypeName')!=null){
-          app.globalData.activeSubtypeName = wx.getStorageSync('activeSubtypeName');
-          console.log("读取子分类名称缓存成功" + app.globalData.activeSubtypeName);
-          that.setData({
-            flag_storage: true,
-            activeSubtypeName: app.globalData.activeSubtypeName
-          });
+          app.globalData.activeSubtypeName = wx.getStorageSync('activeSubtypeName') || "";
+          if (app.globalData.activeSubtypeName!=""){
+            console.log("读取子分类名称缓存成功" + app.globalData.activeSubtypeName);
+            that.setData({
+              flag_storage: true,
+              activeSubtypeName: app.globalData.activeSubtypeName
+            });
+          }
+
         };
 
 
         //调用API从本地缓存中获取音乐id数据
         if (wx.getStorageSync('music_id') != null) {
-          app.globalData.curplay.id = wx.getStorageSync('music_id');
-          console.log("读取音乐id缓存成功" + app.globalData.curplay.id);
-          that.setData({
-            flag_storage: true,
-            flag_music:true
-          });
+          app.globalData.curplay.id = wx.getStorageSync('music_id') ||-1;
+          if (app.globalData.curplay.id!=-1){
+            console.log("读取音乐id缓存成功" + app.globalData.curplay.id);
+            that.setData({
+              flag_storage: true,
+              flag_music: true
+            });
+          }
+
         };
 
         // 加载历史缓存
@@ -166,7 +183,7 @@ Page({
         //   })
         // }
 
-        if (!that.data.flag_storage){ //没有音乐缓存，加载第一个分类的子分类，并等用户点击子分类再播放
+        if (!that.data.flag_music){ //没有音乐缓存，加载第一个分类的子分类，并等用户点击子分类再播放
           //没有音乐播放
           console.log("that" + that.data.flag_storage);
           app.globalData.globalStop = true;
@@ -175,7 +192,7 @@ Page({
 
           //加载子分类列表
           wx.request({
-            url: app.globalData.homeUrl +'/getSubtypesList?key=0',
+            url: app.globalData.homeUrl + '/getSubtypesList?key=' + that.data.sortingList[0].id,
             header: { 'Content-Type': 'application/json' },
             success: function (res) {
               that.setData({
@@ -240,7 +257,7 @@ Page({
         url: app.globalData.homeUrl +'/getSong?id=' + id,
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
-          console.log("songs" + res.data);
+          console.log("songs" + JSON.stringify(res.data));
           app.globalData.curplay = res.data.songs;
           console.log("songs" + app.globalData.curplay.id);
           console.log("mp3链接" + app.globalData.curplay.location);
@@ -379,14 +396,15 @@ Page({
         header: { 'Content-Type': 'application/json' },
         success: function (res) {
           console.log("r"+JSON.stringify(res));
-          if (res.music_message!=null){
-            console.log("other" + res.music_message);
+          if (res.data.music_message!=null){
+            console.log("other" + res.data.music_message);
             app.globalData.curplay.id = res.data.music_message.music_id;
             app.globalData.activeSortingIndex = res.data.music_message.sorting_id;
             app.globalData.activeSubtypeIndex = res.data.music_message.subtype_id;
             app.globalData.activeSortingName = res.data.music_message.sorting_name;
             app.globalData.activeSubtypeName = res.data.music_message.subtype_name;
             var curitem = 0;
+
             for (var i = 0; i < that.data.sortingList.length; i++) {
               if (res.data.sorting_id == that.data.sortingList[i].id) {
                 curitem = i;
@@ -395,14 +413,19 @@ Page({
             }
 
             that.setData({//把分类和子类都刷新一下
-              activeSortingIndex: res.data.sorting_id,
-              activeSortingName: res.data.sorting_name,
-              activeSubtypeIndex: res.data.subtype_id,
-              activeSubtypeName: res.data.subtype_name,
+              activeSortingIndex: res.data.music_message.sorting_id,
+              activeSortingName: res.data.music_message.sorting_name,
+              activeSubtypeIndex: res.data.music_message.subtype_id,
+              activeSubtypeName: res.data.music_message.subtype_name,
               activeCuritem: curitem,
             });
 
-            if (app.globalData.activeSortingIndex != that.data.old_typd) {//跳分类了
+            
+
+            if (app.globalData.activeSortingIndex != that.data.old_type) {//跳分类了
+            console.log("跳分类了");
+            console.log("old:"+that.data.old_type);
+            console.log("new:" + app.globalData.activeSortingIndex);
               that.setData({
                 old_type: app.globalData.activeSortingIndex
               })
@@ -494,7 +517,7 @@ Page({
         that.setData({
           sortingChioceIcon: "/image/music88.png",
           activeSortingIndex: this.data.sortingList[index].id,
-          old_typd: this.data.sortingList[index].id,
+          old_type: this.data.sortingList[index].id,
           activeSortingName: this.data.sortingList[index].typeName,
           pageIndex: 1,
           loadOver: false,
@@ -504,8 +527,11 @@ Page({
         })
 
         app.globalData.activeCuritem = index;
+        app.globalData.activeSortingIndex = this.data.sortingList[index].id;
+        app.globalData.activeSortingName = this.data.sortingList[index].typeName;
+        app.globalData.activeCuritem = index;
 
-        console.log("id" + this.data.activeSortingIndex);
+        console.log("this.data.activeSortingIndex" + this.data.activeSortingIndex);
       },
 
 
@@ -523,6 +549,8 @@ Page({
       isLoading: true,
     })
     console.log("subtypeName" + obj.typeName);
+    app.globalData.activeSubtypeIndex = obj.id;
+    app.globalData.activeSubtypeName = obj.typeName;
 
     //根据子分类来获取音频：
 
@@ -570,6 +598,7 @@ Page({
               console.log("here");
               
               that.setData({
+                music_title: app.globalData.curplay.courseName,
                 playing: true
               })
             },
@@ -652,9 +681,9 @@ Page({
     
     wx.setStorage({
       key: 'activeSortingIndex',
-      data: that.data.activeSortingIndex,
+      data: app.globalData.activeSortingIndex,
       success: function (res) {
-        console.log('异步保存分类id成功')
+        console.log('异步保存分类id成功' + app.globalData.activeSortingIndex)
       }
     }),
       wx.setStorage({
@@ -666,33 +695,33 @@ Page({
       }),
       wx.setStorage({
         key: 'activeSortingName',
-        data: that.data.activeSortingName,
+        data: app.globalData.activeSortingName,
       success: function (res) {
-        console.log('异步保存分类名称成功')
+        console.log('异步保存分类名称成功' + app.globalData.activeSortingName)
       }
     }),
 
       wx.setStorage({
         key: 'activeCuritem',
-        data: that.data.activeCuritem,
+        data: app.globalData.activeCuritem,
         success: function (res) {
-          console.log('异步保存分类index成功')
+          console.log('异步保存分类index成功' + app.globalData.activeCuritem)
         }
       }),
 
       wx.setStorage({
         key: 'activeSubtypeIndex',
-        data: that.data.activeSubtypeIndex,
+        data: app.globalData.activeSubtypeIndex,
           success: function (res) {
-            console.log('异步保存子分类id成功')
+            console.log('异步保存子分类id成功' + app.globalData.activeSubtypeIndex)
           }
       }),
 
       wx.setStorage({
       key: 'activeSubtypeName',
-      data: that.data.activeSubtypeName,
+      data: app.globalData.activeSubtypeName,
       success: function (res) {
-        console.log('异步保存子分类名称成功')
+        console.log('异步保存子分类名称成功' + app.globalData.activeSubtypeName)
       }
     }),
 
