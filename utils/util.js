@@ -110,7 +110,6 @@ function playAlrc(that, app) {
         time = res.currentPosition / res.duration * 100;
         playtime = res.currentPosition;   
         app.globalData.duration = res.duration;   
-
       } if (res.status == 1) {
         playing = true;
       }

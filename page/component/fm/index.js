@@ -24,10 +24,10 @@ Page({
 
         music_title:"",
 
-        activeSortingIndex: -1,
-        activeCuritem: -1,
+        activeSortingIndex: -1,//id
+        activeCuritem: -1,//index
         activeSortingName: "",
-        activeSubtypeIndex: -1,
+        activeSubtypeIndex: -1,//id
         activeSubtypeName:"",
 
         //判断缓存是否已经读完
@@ -226,7 +226,7 @@ Page({
              * 监听音乐自然播完停止
              */
         wx.onBackgroundAudioStop(function () {
-          console.log('onBackgroundAudioStop')
+          console.log('onBackgroundAudioStop');
           that.playother(1);
         })
         
@@ -242,10 +242,6 @@ Page({
 
     playMusic: function (id) {
       var that = this;
-
-
-      that.setPlayStorage();//存缓存
-
       console.log("music_id"+id);
 
       //清除播放进度
@@ -268,6 +264,7 @@ Page({
             })
           } else {
             console.log("获取成功");
+            that.setPlayStorage();//存缓存
             wx.playBackgroundAudio({
               dataUrl: app.globalData.mp3UrlHeader+app.globalData.curplay.location,
               title: app.globalData.curplay.courseName,
@@ -431,7 +428,7 @@ Page({
               })
               //加载子分类列表
               wx.request({
-                url: app.globalData.homeUrl + '/getSubtypesList?key=' + that.data.sortingList[app.globalData.activeSortingIndex].id,
+                url: app.globalData.homeUrl + '/getSubtypesList?key=' + app.globalData.activeSortingIndex,
                 header: { 'Content-Type': 'application/json' },
                 success: function (res) {
                   that.setData({
@@ -569,11 +566,9 @@ Page({
             disable: true
           })
         } else {
-
+          //获取mp3链接成功
           console.log("name" + res.data.songs.courseName);
-
-          //缓存
-          that.setPlayStorage();
+          that.setPlayStorage();//存缓存
           //清除播放进度
           wx.seekBackgroundAudio({
             position: 0
