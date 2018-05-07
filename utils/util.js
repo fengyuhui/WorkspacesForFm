@@ -100,7 +100,7 @@ function playAlrc(that, app) {
       showlrc: false,
       duration: "00:00"
     });
-    console.log("not match");
+    console.log("not match: app:" + app.globalData.curplay.id + " music.id" + that.data.music.id);
     wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
   }
   wx.getBackgroundAudioPlayerState({

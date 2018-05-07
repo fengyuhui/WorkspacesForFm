@@ -60,11 +60,11 @@
       <view bindtap="playother" data-signal="-1" id = "switchleft">
         <image src="../../../image/fm/time_left.png" style = 'width: 30rpx;height:21rpx;'/>
       </view>
-      <view bindtap="play" id = "switchmiddle" hidden="{{!playing}}">
-        <image src="../../../image/fm/play_stop.png" style = 'width: 162rpx;height:80rpx;'/>
+      <view id = "switchmiddle" hidden="{{!playing}}">
+        <image src="../../../image/fm/play_stop.png" bindtap="play" style = 'width: 162rpx;height:80rpx;'/>
       </view>
-      <view bindtap="play" id = "switchmiddle" hidden="{{playing}}">
-        <image src="../../../image/fm/play_start.png" style = 'width: 162rpx;height:80rpx;'/>
+      <view id = "switchmiddle" hidden="{{playing}}">
+        <image src="../../../image/fm/play_start.png" bindtap="play" style = 'width: 162rpx;height:80rpx;'/>
       </view>
       <view bindtap="playother"  data-signal="1" id = "switchright">
         <image src="../../../image/fm/time_right.png" style = 'width: 30rpx;height:21rpx;'/>
