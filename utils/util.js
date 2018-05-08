@@ -119,7 +119,6 @@ function playAlrc(that, app) {
       percent: 0
     });
     that.playother(1);
-    return;
   });
 
   bgM.onStop(function(){
@@ -129,9 +128,9 @@ function playAlrc(that, app) {
       duration: "00:00",
       playtime: "00:00",
       playing: false,
-      percent: 0
+      percent: 0,
+      music_title: ""
     });
-    return;
   });
 
   wx.getBackgroundAudioPlayerState({

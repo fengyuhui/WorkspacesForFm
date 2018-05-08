@@ -219,6 +219,7 @@ Page({
         //有音乐缓存则播放之前的音乐
         else if(that.data.flag_music){
            that.playMusic(app.globalData.curplay.id);//为了测试暂时删掉这行，要加回来的！
+           console.log("有缓存");
           //that.playMusic(1);
           }
 
@@ -345,7 +346,7 @@ Page({
     },
     onHide: function () {
         var that = this;
-        //clearInterval(seek);不清除定时器
+        clearInterval(seek);//不清除定时器
         that.setPlayStorage();
     },
     like: function () {
