@@ -595,8 +595,8 @@ Page({
 
           that.setData({
             imgload: true,
-            playtime: common.formatduration(0),
-            duration: common.formatduration(0),
+            playtime: "00:00",
+            duration: "00:00",
             percent: .1,
             music: {},
             commentscount: 0,
