@@ -2,7 +2,6 @@
 App({
   onLaunch: function () {
     var that = this;
-    //播放列表中下一首
     wx.onBackgroundAudioStop(function () {
       if (that.globalData.globalStop) {
         
