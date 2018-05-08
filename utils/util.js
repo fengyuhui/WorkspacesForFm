@@ -104,6 +104,35 @@ function playAlrc(that, app) {
     console.log("not match: app:" + app.globalData.curplay.id + " music.id" + that.data.music.id);
     wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
   }
+  const backgroundAudioManager = wx.getBackgroundAudioManager();
+  const bgM = backgroundAudioManager;
+  bgM.onEnded(function(){
+    /*监听音乐自然播完停止*/
+
+    console.log('onBackgroundAudioEnded');
+    app.globalData.duration = "00:00";
+    that.setData({
+      duration: "00:00",
+      playtime: "00:00",
+      playing: false,
+      percent: 0
+    });
+    that.playother(1);
+    return;
+  });
+
+  bgM.onStop(function(){
+    console.log("bgM.onStop");
+    app.globalData.duration = "00:00";
+    that.setData({
+      duration: "00:00",
+      playtime: "00:00",
+      playing: false,
+      percent: 0
+    });
+    return;
+  });
+
   wx.getBackgroundAudioPlayerState({
     complete: function (res) {
       var time = 0, playing = false, playtime = 0, duration = 0;
@@ -114,12 +143,7 @@ function playAlrc(that, app) {
       } if (res.status == 1) {
         playing = true;
       }
-      if (res.status == 0){
-        app.globalData.duration = "00:00";
-        that.setData({
-          duration:"00:00"
-        })
-      }
+
       that.setData({
         playtime: formatduration(playtime * 1000),
         percent: time,

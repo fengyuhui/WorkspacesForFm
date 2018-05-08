@@ -223,29 +223,18 @@ Page({
           }
 
 
-        wx.onBackgroundAudioStop(function () {
-          console.log('onBackgroundAudioStop');
-          app.globalData.duration = "00:00";
-          that.setData({
-            duration:"00:00"
-          });
-
-          that.playother(1);
-        })
-
-        /**
-             * 监听音乐自然播完停止
-             */
-        // wx.backgroundAudioManager().onEnded(function(){
-        //   console.log('onBackgroundAudioEnded');
+        // wx.onBackgroundAudioStop(function () {
+        //   console.log('onBackgroundAudioStop');
         //   app.globalData.duration = "00:00";
         //   that.setData({
-        //     duration: "00:00"
+        //     duration: "00:00",
+        //     playtime: "00:00",
+        //     playing: false,
+        //     percent: 0
         //   })
-        // });
-        
 
-        
+         //that.playother(1);
+        // })          
     },
     getUserInfo: function (e) {
       console.log(e)
@@ -259,6 +248,9 @@ Page({
     playMusic: function (id) {
       var that = this;
       console.log("music_id"+id);
+
+      const backgroundAudioManager = wx.getBackgroundAudioManager();
+      const bgM = backgroundAudioManager;
 
       //清除播放进度
       wx.seekBackgroundAudio({
@@ -281,19 +273,28 @@ Page({
           } else {
             console.log("获取成功");
             that.setPlayStorage();//存缓存
-            wx.playBackgroundAudio({
-              dataUrl: app.globalData.mp3UrlHeader+app.globalData.curplay.location,
-              title: app.globalData.curplay.courseName,
-              success: function (res) {
-                app.globalData.globalStop = false;
+            bgM.src = app.globalData.mp3UrlHeader + app.globalData.curplay.location;
+            bgM.title = app.globalData.curplay.courseName;
+            app.globalData.globalStop = false;
                 that.setPlayStorage();//存缓存
                 that.setData({
                   music_title: app.globalData.curplay.courseName,
                   playing:true,
                   music: app.globalData.curplay
-                }) 
-              }
-            });
+                })
+            // wx.playBackgroundAudio({
+            //   dataUrl: app.globalData.mp3UrlHeader+app.globalData.curplay.location,
+            //   title: app.globalData.curplay.courseName,
+            //   success: function (res) {
+            //     app.globalData.globalStop = false;
+            //     that.setPlayStorage();//存缓存
+            //     that.setData({
+            //       music_title: app.globalData.curplay.courseName,
+            //       playing:true,
+            //       music: app.globalData.curplay
+            //     }) 
+            //   }
+            // });
             wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName });
           }
         },
