@@ -363,16 +363,22 @@ Page({
 
     //暂停和播放
     play: function (m) {
-        var that = this
-        if (that.data.playing) {
+        var that = this;
+        const backgroundAudioManager = wx.getBackgroundAudioManager();
+        const bgM = backgroundAudioManager;
+        if (!bgM.paused) {
             that.setData({ playing: false });
-            app.stopmusic(1);
+            //app.stopmusic(1);
+            bgM.pause();
+            app.globalData.currentPosition = bgM.currentTime || 0;
+            console.log("play");
         } else {
-            app.seekmusic(2, function () {
-                that.setData({
-                    playing: true
-                });
-            }, app.globalData.currentPosition);
+          bgM.seek(bgM.currentTime);
+          bgM.play();
+          console.log("currentTime" + bgM.currentTime);
+          that.setData({
+            playing: true
+          });
         }
     },
 
