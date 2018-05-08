@@ -381,7 +381,7 @@ Page({
           //   playing: true
           // });
           console.log("continue play");
-          app.seekmusic(1, function () {
+          app.seekmusic(2, function () {
             that.setData({
               playing: true
             });

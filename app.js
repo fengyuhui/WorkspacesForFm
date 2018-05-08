@@ -120,8 +120,8 @@ App({
     }
 
     wx.playBackgroundAudio({
-      dataUrl: res.data.songs.location,
-      title: res.data.songs.courseName,
+      dataUrl: m.location2,
+      title: m.courseName,
       success: function (res) {
         console.log("mp3:" + JSON.stringify(res));
         if (seek != undefined) {
@@ -131,12 +131,12 @@ App({
         cb && cb();
       },
       fail: function (res) {
-        //that.nextplay(1)
         console.log("fail:" + JSON.stringify(res));
+        that.nextplay(1);
       }
     })
 
-    
+
   },
   shuffleplay: function (shuffle) {
     //播放模式shuffle，1顺序，2单曲，3随机
