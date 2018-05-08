@@ -366,19 +366,32 @@ Page({
         var that = this;
         const backgroundAudioManager = wx.getBackgroundAudioManager();
         const bgM = backgroundAudioManager;
-        if (!bgM.paused) {
+        //if (!bgM.paused) {
+        if (that.data.playing && !app.globalData.playStop) {
+            console.log("play到pause");
             that.setData({ playing: false });
-            //app.stopmusic(1);
-            bgM.pause();
             app.globalData.currentPosition = bgM.currentTime || 0;
-            console.log("play");
-        } else {
-          bgM.seek(bgM.currentTime);
-          bgM.play();
-          console.log("currentTime" + bgM.currentTime);
-          that.setData({
-            playing: true
-          });
+            app.stopmusic(1);
+            //bgM.pause();
+        } else if (!that.data.playing){
+          // bgM.seek(bgM.currentTime);
+          // bgM.play();
+          // console.log("currentTime" + bgM.currentTime);
+          // that.setData({
+          //   playing: true
+          // });
+          console.log("continue play");
+            that.setData({
+              playing: true
+            });
+          }, app.globalData.currentPosition);
+          // console.log("currentTime" + app.globalData.currentPosition);
+          // that.setData({
+          //   playing: true
+          // });
+          // bgM.seek(app.globalData.currentPosition);
+          // wx.seekBackgroundAudio({ position: app.globalData.currentPosition });
+          // app.globalData.globalStop = false;
         }
     },
 

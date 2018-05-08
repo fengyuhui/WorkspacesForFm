@@ -124,6 +124,7 @@ function playAlrc(that, app) {
   bgM.onStop(function(){
     console.log("bgM.onStop");
     app.globalData.duration = "00:00";
+    app.globalData.playStop = true;
     that.setData({
       duration: "00:00",
       playtime: "00:00",

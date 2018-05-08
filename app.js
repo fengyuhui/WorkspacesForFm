@@ -84,34 +84,40 @@ App({
 
   //暂停后播放
   seekmusic: function (type, cb, seek) {
-    console.log("type:",type)
     var that = this;
-    var m = this.globalData.curplay;
-    this.globalData.playtype = type;
+    console.log("type:",type);
+    console.log("seek:"+seek);
+    var m = that.globalData.curplay;
+    console.log("music_id:" + that.globalData.curplay.id);
+    that.globalData.playtype = type;
     if (type == 1) {
       wx.request({
         url: that.globalData.homeUrl+'/getSong?id=' + that.globalData.curplay.id,
         success: function (res) {
-          if (!res.data.songs[0].mp3Url) {
-            that.nextplay(1);
-          }
+          console.log("success"+JSON.stringify(res));
+          that.globalData.curplay = res.data.songs;
+          wx.playBackgroundAudio({
+            dataUrl: res.data.songs.location,
+            title: res.data.songs.courseName,
+            success: function (res) {
+              console.log("mp3:" + JSON.stringify(res));
+              if (seek != undefined) {
+                wx.seekBackgroundAudio({ position: seek })
+              };
+              that.globalData.globalStop = false;
+              cb && cb();
+            },
+            fail: function (res) {
+              //that.nextplay(1)
+              console.log("fail:" + JSON.stringify(res));
+            }
+          })
+        },
+        fail: function(res){
+          console.log("fail:" + JSON.stringify(res));
         }
       })
     }
-    wx.playBackgroundAudio({
-      dataUrl: m.mp3Url,
-      title: m.name,
-      success: function (res) {
-        if (seek != undefined) {
-          wx.seekBackgroundAudio({ position: seek })
-        };
-        that.globalData.globalStop = false;
-        cb && cb();
-      },
-      fail: function () {
-        that.nextplay(1)
-      }
-    })
   },
   shuffleplay: function (shuffle) {
     //播放模式shuffle，1顺序，2单曲，3随机
@@ -182,6 +188,7 @@ App({
     activeCuritem:0,
     activeSortingName: "",
     activeSubtypeIndex: -1,
-    activeSubtypeName:""
+    activeSubtypeName:"",
+    playStop: false
   }
 })
