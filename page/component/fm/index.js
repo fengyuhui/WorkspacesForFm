@@ -344,8 +344,9 @@ Page({
       //  wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName + "-" + app.globalData.curplay.artists[0].name || "" });
     },
     onHide: function () {
-        clearInterval(seek);
-        setPlayStorage();
+        var that = this;
+        //clearInterval(seek);不清除定时器
+        that.setPlayStorage();
     },
     like: function () {
 

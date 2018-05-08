@@ -99,7 +99,8 @@ function playAlrc(that, app) {
     that.setData({
       music: app.globalData.curplay,
       showlrc: false,
-      duration: "00:00"
+      duration: "00:00",
+      playtime: "00:00"
     });
     console.log("not match: app:" + app.globalData.curplay.id + " music.id" + that.data.music.id);
     wx.setNavigationBarTitle({ title: app.globalData.curplay.courseName});
@@ -137,9 +138,11 @@ function playAlrc(that, app) {
     complete: function (res) {
       var time = 0, playing = false, playtime = 0, duration = 0;
       if (res.status != 2) {
-        time = res.currentPosition / res.duration * 100;
-        playtime = res.currentPosition;   
-        app.globalData.duration = res.duration;   
+        if (res.duration!=null){
+          time = res.currentPosition / res.duration * 100;
+          playtime = res.currentPosition;
+          app.globalData.duration = res.duration; 
+        }  
       } if (res.status == 1) {
         playing = true;
       }
